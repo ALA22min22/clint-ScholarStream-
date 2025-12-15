@@ -1,34 +1,35 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router';
+import {  Link, NavLink } from 'react-router';
 import Logo from './Logo';
-// import Logo from '../../../component/Logo/Logo';
-// import UseAuth from '../Pages/Hooks/UseAuth';
+import UseAuth from '../Pages/Hooks/UseAuth';
+
+
 
 
 const Header = () => {
-    // const {user, logOuth} = UseAuth();
+    const {user, logOuth} = UseAuth();
     const links = <>
         <li><NavLink>Home</NavLink></li>
         <li><NavLink>About</NavLink></li>
         <li><NavLink to={'/covarage'}>Coverage</NavLink></li>
         <li><NavLink to={'/sendParcel'}>Send Parcel</NavLink></li>
         <li><NavLink to={'/rider'}>Rider</NavLink></li>
-        {/* {
+        {
             user &&
-            <li><NavLink to={'/dashboard/my-parcel'}>My Parcels</NavLink></li>
-        } */}
+            <li><NavLink to={'/myProfile'}>My Profile</NavLink></li>
+        }
 
     </>
-    // const handleLogout = ()=> {
-    //     logOuth()
-    //     .then(result => {
-    //         alert("user logout sucessfull", result)
+    const handleLogout = ()=> {
+        logOuth()
+        .then(result => {
+            alert("user logout sucessfull", result)
             
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //     })
-    // }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
     return (
         <div className="navbar bg-[#F5FCFF] text-black shadow-sm">
             <div className="navbar-start">
@@ -50,10 +51,10 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-2">
-                {/* {
+                {
                     user? <a onClick={handleLogout} className="btn">LogOut</a> : <Link to={'/login'}><a className="btn">LogIn</a></Link>
-                } */}
-                <Link to={'/rider'}><a className="btn btn-primary text-black">Be a rider</a></Link>
+                }
+                {/* <Link to={"/login"} className="btn">LogIn</Link */}
             </div>
         </div>
     );
