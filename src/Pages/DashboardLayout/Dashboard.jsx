@@ -1,5 +1,6 @@
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
+import { FaShoppingCart } from 'react-icons/fa';
 import { IoIosAddCircle } from 'react-icons/io';
 import { NavLink, Outlet } from 'react-router';
 
@@ -41,6 +42,14 @@ const Dashboard = () => {
                                 <span className="is-drawer-close:hidden">My Profile</span>
                             </NavLink>
                         </li>
+
+                        <li>
+                            <NavLink to={'/myApplications'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
+                                <FaShoppingCart />
+                                <span className="is-drawer-close:hidden">My Applications</span>
+                            </NavLink>
+                        </li>
+
                         <li>
                             <NavLink to={'/addScholarship'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Scholarship">
                                 <IoIosAddCircle />

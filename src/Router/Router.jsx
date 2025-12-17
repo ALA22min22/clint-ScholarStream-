@@ -10,6 +10,7 @@ import MyProfile from "../Pages/DashboardLayout/MyProfile";
 import AllScholarship from "../Pages/AllScholarship/AllScholarship";
 import AddScholarship from "../Pages/AllScholarship/AddScholarship";
 import ScholershipDetails from "../Pages/AllScholarship/ScholershipDetails";
+import MyApplications from "../Pages/DashboardLayout/MyApplications";
 
 export const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
             {
                 path: "addScholarship",
                 Component: AddScholarship
+            },
+            {
+                path: "myApplications",
+                element: <PrivateRoute> <MyApplications></MyApplications> </PrivateRoute>
             }
         ]
     }

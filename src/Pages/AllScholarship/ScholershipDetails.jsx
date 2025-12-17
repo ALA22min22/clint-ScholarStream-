@@ -1,14 +1,17 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import UseAxiosSequre from '../Hooks/UseAxiosSequre';
 import { useQuery } from '@tanstack/react-query';
 import ReviewForm from './ReviewForm';
 import ReviewSections from './ReviewSections';
+import UseAuth from '../Hooks/UseAuth';
 
 const ScholershipDetails = () => {
+    const { user } = UseAuth();
+    const navigate = useNavigate();
     const { id } = useParams();
-    // const newId = parseInt(id)
     const axiooSecure = UseAxiosSequre();
+
     const { data: scholarship = [] } = useQuery({
         queryKey: ["scholarships", id],
         queryFn: async () => {
@@ -16,6 +19,40 @@ const ScholershipDetails = () => {
             return res.data
         }
     })
+
+    const { data: currentUser = [] } = useQuery({
+        queryKey: ["users", user?.email],
+        queryFn: async () => {
+            const res = await axiooSecure.get(`/users?email=${user.email}`);
+            return res.data;
+        }
+    })
+
+    //  console.log("user id", currentUser[0]?.displayName)
+
+    const handleApply = data => {
+        const insertOnTheAC = {
+            scholarshipId: data._id,
+            userId: currentUser[0]?._id,
+            userName: currentUser[0]?.displayName,
+            userEmail: currentUser[0]?.email,
+            universityName: data.universityName,
+            scholarshipName: data.scholarshipName,
+            scholarshipCategory: data.scholarshipCategory,
+            degree: data.degree,
+            applicationFees: data.applicationFees,
+            serviceCharge: data.serviceCharge,
+        }
+
+        axiooSecure.post('/applications', insertOnTheAC)
+            .then(res => {
+                if (res.data.insertedId) {
+                    console.log(`after insert the application data ${res.data}`)
+                    navigate('/myApplications')
+                }
+            })
+
+    }
 
 
     // console.log("after details", details)
@@ -38,7 +75,7 @@ const ScholershipDetails = () => {
                             </h1>
                             <p className="text-white/90 text-lg font-semibold flex items-center gap-2">
                                 <span className="bg-primary px-3 py-1 rounded text-sm text-white">{scholarship.scholarshipCategory}</span>
-                                {scholarship.universityName} 
+                                {scholarship.universityName}
                             </p>
                         </div>
                     </div>
@@ -116,7 +153,7 @@ const ScholershipDetails = () => {
                                             <span className="font-bold text-right">{scholarship.country}, {scholarship.city}</span>
                                         </div>
 
-                                         {/* Post Date  */}
+                                        {/* Post Date  */}
                                         <div className="flex justify-between items-center border-b pb-2">
                                             <span className="text-gray-500 font-medium">Post Date</span>
                                             <span className="font-bold text-primary">{scholarship.postDate}</span>
@@ -127,7 +164,7 @@ const ScholershipDetails = () => {
                                             <span className="text-gray-500 font-medium">Deadline</span>
                                             <span className="font-bold text-red-500">{scholarship.deadline}</span>
                                         </div>
-                                       
+
 
                                         {/* Application Fees */}
                                         <div className="flex justify-between items-center border-b pb-2">
@@ -142,7 +179,7 @@ const ScholershipDetails = () => {
                                     </div>
 
                                     {/* Apply Button */}
-                                    <div  className="card-actions mt-6">
+                                    <div onClick={() => handleApply(scholarship)} className="card-actions mt-6">
                                         <button className="btn btn-primary w-full text-lg font-bold text-white transition-all hover:scale-105">
                                             Apply Now
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
