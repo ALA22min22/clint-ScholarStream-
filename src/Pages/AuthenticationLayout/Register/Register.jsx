@@ -35,7 +35,8 @@ const Register = () => {
                     .then(res => {
                         console.log("after send the img to imgBB", res.data.data.display_url)
                         const imageURL = res.data.data.display_url
-
+    
+                        //mongodb post data:
                         const sendData = {
                             email: data.email,
                             displayName: data.name,

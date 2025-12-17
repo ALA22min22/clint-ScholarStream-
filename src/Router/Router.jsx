@@ -7,6 +7,9 @@ import Login from "../Pages/AuthenticationLayout/Login/Login";
 import PrivateRoute from "../Provider/PrivateRoute";
 import Dashboard from "../Pages/DashboardLayout/Dashboard";
 import MyProfile from "../Pages/DashboardLayout/MyProfile";
+import AllScholarship from "../Pages/AllScholarship/AllScholarship";
+import AddScholarship from "../Pages/AllScholarship/AddScholarship";
+import ScholershipDetails from "../Pages/AllScholarship/ScholershipDetails";
 
 export const router = createBrowserRouter([
     {
@@ -16,8 +19,18 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                path: 'home',
                 Component: Home
             },
+            {
+                path: "allScholarship",
+                Component: AllScholarship
+            },
+            {
+                path: "scholarships/:id",
+                element: <PrivateRoute> <ScholershipDetails></ScholershipDetails> </PrivateRoute>
+            }
+            
            
         ]
     },
@@ -43,7 +56,11 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: 'myProfile',
-                Component: MyProfile
+                element: <PrivateRoute> <MyProfile></MyProfile> </PrivateRoute>
+            },
+            {
+                path: "addScholarship",
+                Component: AddScholarship
             }
         ]
     }

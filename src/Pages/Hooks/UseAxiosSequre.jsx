@@ -1,16 +1,43 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
+import UseAuth from './UseAuth';
 
-const interseptor = axios.create({
+const axiosSecure = axios.create({
     baseURL: "http://localhost:5000"
 })
 
 const UseAxiosSequre = () => {
+    const { user, logOuth } = UseAuth();
 
     //some work like token
 
-    return interseptor;
-    
+    useEffect(() => {
+      const interceptoRequest =  axiosSecure.interceptors.request.use((config) => {
+            config.headers.Authorization = `Bearer ${user?.accessToken}`
+            return config
+        })
+
+     const interceptorResponce = axiosSecure.interceptors.response.use((response)=>{
+
+            return response
+        },
+    (error)=>{
+        console.log('interceptor response faild', error)
+        const status = error.status;
+        if(status === 401 || status === 403){
+            logOuth()
+        }
+        return Promise.reject(error);
+    })
+    //remove interceptor:
+    return ()=>{
+        axiosSecure.interceptors.request.eject(interceptoRequest);
+        axiosSecure.interceptors.response.eject(interceptorResponce);
+    }
+    }, [user, logOuth])
+
+    return axiosSecure;
+
 };
 
 export default UseAxiosSequre;

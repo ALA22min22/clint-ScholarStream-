@@ -9,11 +9,11 @@ import UseAuth from '../Pages/Hooks/UseAuth';
 const Header = () => {
     const {user, logOuth} = UseAuth();
     const links = <>
-        <li><NavLink>Home</NavLink></li>
-        <li><NavLink>About</NavLink></li>
-        <li><NavLink to={'/covarage'}>Coverage</NavLink></li>
+        <li><NavLink to={"/home"}>Home</NavLink></li>
+        <li><NavLink to={'/allScholarship'}>All Scholarship </NavLink></li>
+        {/* <li><NavLink to={'/covarage'}>Coverage</NavLink></li>
         <li><NavLink to={'/sendParcel'}>Send Parcel</NavLink></li>
-        <li><NavLink to={'/rider'}>Rider</NavLink></li>
+        <li><NavLink to={'/rider'}>Rider</NavLink></li> */}
         {
             user &&
             <li><NavLink to={'/myProfile'}>My Profile</NavLink></li>

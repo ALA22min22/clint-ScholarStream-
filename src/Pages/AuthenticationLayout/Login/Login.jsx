@@ -1,14 +1,27 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import GmailLogin from '../GmailLogin';
+import UseAuth from '../../Hooks/UseAuth';
+import { toast, ToastContainer } from 'react-toastify';
 // import { Link } from 'react-router';
 
 const Login = () => {
+    const { login } = UseAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const handleLoginFrom = data => {
         console.log(data)
+        login(data.email, data.password)
+        .then(result => {
+            console.log("login sucessfull",result.user);
+            navigate(location.state? location.state : "/")
+        })
+        .catch(error => {
+            toast(`login faild : ${error}`)
+        })
     }
 
     return (
@@ -33,7 +46,7 @@ const Login = () => {
                             errors.password?.type === 'minLength' && <p className='text-red-500'>Minimum password length is 6 or more</p>
                         }
                         {
-                            errors.password?.type ==="pattern" && <p className='text-red-500'>Minimum One Capital letter & One Speacial Cherechters Required</p>
+                            errors.password?.type === "pattern" && <p className='text-red-500'>Minimum One Capital letter & One Speacial Cherechters Required</p>
                         }
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn btn-neutral mt-4">Login</button>
@@ -42,6 +55,7 @@ const Login = () => {
                 <GmailLogin></GmailLogin>
                 <p>Are you new our zap shift? <Link state={location.state} to={'/register'} className='text-blue-500'>Register</Link></p>
             </div>
+            <ToastContainer />
         </div>
     );
 };
