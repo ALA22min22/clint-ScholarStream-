@@ -9,3 +9,8 @@
   --color-primary: blue;
   --color-secondary: teal;
 }
+
+a.active {
+  border: 1px solid black;
+  padding: 1px;
+}

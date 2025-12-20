@@ -1,6 +1,8 @@
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaUsersCog } from 'react-icons/fa';
+import { FcOrganization } from 'react-icons/fc';
+import { GoCodeReview } from 'react-icons/go';
 import { IoIosAddCircle } from 'react-icons/io';
 import { NavLink, Outlet } from 'react-router';
 
@@ -37,23 +39,43 @@ const Dashboard = () => {
                         {/*-----------our sideBar Content --------------------------*/}
                         {/* My  */}
                         <li>
-                            <NavLink to={'/myProfile'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Profile">
+                            <NavLink to={'/dashboard/myProfile'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Profile">
                                 <CgProfile />
                                 <span className="is-drawer-close:hidden">My Profile</span>
                             </NavLink>
                         </li>
 
+                        {/* Student */}
                         <li>
-                            <NavLink to={'/myApplications'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
+                            <NavLink to={'/dashboard/myApplications'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
                                 <FaShoppingCart />
                                 <span className="is-drawer-close:hidden">My Applications</span>
                             </NavLink>
                         </li>
-
                         <li>
-                            <NavLink to={'/addScholarship'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Scholarship">
+                            <NavLink to={'/dashboard/myReview'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Review">
+                                <GoCodeReview />
+                                <span className="is-drawer-close:hidden">My Review</span>
+                            </NavLink>
+                        </li>
+
+                        {/* Admin */}
+                        <li>
+                            <NavLink to={'/dashboard/addScholarship'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Scholarship">
                                 <IoIosAddCircle />
-                                <span className="is-drawer-close:hidden">My Profile</span>
+                                <span className="is-drawer-close:hidden">Add Scholarship</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/dashboard/manage-scholarships'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Scholarships">
+                                <FcOrganization />
+                                <span className="is-drawer-close:hidden">Manage Scholarships</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/dashboard/manage-users'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users">
+                                <FaUsersCog />
+                                <span className="is-drawer-close:hidden">Manage Users</span>
                             </NavLink>
                         </li>
 

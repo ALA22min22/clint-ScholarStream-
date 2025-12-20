@@ -16,7 +16,7 @@ const Header = () => {
         <li><NavLink to={'/rider'}>Rider</NavLink></li> */}
         {
             user &&
-            <li><NavLink to={'/myProfile'}>My Profile</NavLink></li>
+            <li><NavLink to={'/dashboard/myProfile'}>My Profile</NavLink></li>
         }
 
     </>
@@ -31,7 +31,7 @@ const Header = () => {
         })
     }
     return (
-        <div className="navbar bg-[#F5FCFF] text-black shadow-sm">
+        <div className="navbar bg-secondary  text-white shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -39,7 +39,7 @@ const Header = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-black">
                         {links}
                     </ul>
                 </div>

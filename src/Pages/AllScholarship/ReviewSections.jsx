@@ -17,12 +17,13 @@ const ReviewSections = ({ scholarship }) => {
       return  <Loading></Loading>
     }
     refetch();
+
     return (
         <div >
                 <h3 className="text-5xl text-black font-bold text-center my-10">All Reviews</h3>
-            <div className='grid grid-cols-3 gap-5 pl-6 '>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto '>
                 {
-                    review.map(data => <div className="card bg-base-100 image-full w-[384px]  shadow-sm">
+                    review.map(data => <div className="card bg-base-100 image-full   shadow-sm">
                 <figure>
                     <img
                         src={data.reviewerImage}

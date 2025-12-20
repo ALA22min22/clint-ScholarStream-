@@ -11,6 +11,12 @@ import AllScholarship from "../Pages/AllScholarship/AllScholarship";
 import AddScholarship from "../Pages/AllScholarship/AddScholarship";
 import ScholershipDetails from "../Pages/AllScholarship/ScholershipDetails";
 import MyApplications from "../Pages/DashboardLayout/MyApplications";
+import PaymentCancelled from "../Pages/DashboardLayout/Payment/PaymentCancelled";
+import PaymentSuccess from "../Pages/DashboardLayout/Payment/PaymentSuccess";
+import MyReviews from "../Pages/DashboardLayout/Students/MyReviews";
+import ManageScholarships from "../Pages/DashboardLayout/Admin/ManageScholarships";
+import UpdateScholership from "../Pages/DashboardLayout/Admin/UpdateScholership";
+import ManageUsers from "../Pages/DashboardLayout/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -51,21 +57,48 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: '/',
+        path: 'dashboard',
         element: <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
-        errorElement: <div>Dashboard. 404 Error. Plz try again</div>,
+        // errorElement: <div>Dashboard. 404 Error. Plz try again</div>,
         children: [
             {
                 path: 'myProfile',
                 element: <PrivateRoute> <MyProfile></MyProfile> </PrivateRoute>
             },
+            // admin
             {
                 path: "addScholarship",
                 Component: AddScholarship
             },
             {
+                path: "manage-scholarships",
+                Component: ManageScholarships
+            },
+            {
+                path: "update-scholarships",
+                Component: UpdateScholership
+            },
+            {
+                path: "manage-users",
+                Component: ManageUsers
+            },
+            // student
+            {
                 path: "myApplications",
                 element: <PrivateRoute> <MyApplications></MyApplications> </PrivateRoute>
+            },
+            {
+                path: "myReview",
+                Component: MyReviews
+            },
+            // payment
+            {
+                path: "payment-success",
+                Component: PaymentSuccess
+            },
+            {
+                path: "payment-cancelled",
+                Component: PaymentCancelled
             }
         ]
     }

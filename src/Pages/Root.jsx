@@ -6,6 +6,9 @@ const Root = () => {
     return (
         <div className='max-w-7xl mx-auto'>
             <Header></Header>
+            {/* <div className='max-w-7xl mx-auto'>
+                
+            </div> */}
             <Outlet></Outlet>
         </div>
     );

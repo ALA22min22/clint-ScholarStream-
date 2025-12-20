@@ -48,7 +48,7 @@ const ScholershipDetails = () => {
             .then(res => {
                 if (res.data.insertedId) {
                     console.log(`after insert the application data ${res.data}`)
-                    navigate('/myApplications')
+                    navigate('/dashboard/myApplications')
                 }
             })
 

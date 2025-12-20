@@ -25,8 +25,6 @@ const ReviewForm = ({ scholarship }) => {
                     toast("the review data is inserted successfully")
                 }
             })
-
-
         reset();
     };
 
@@ -35,7 +33,7 @@ const ReviewForm = ({ scholarship }) => {
             <h2 className="text-5xl text-black font-bold text-center my-10">Write a Review</h2>
             <form
                 onSubmit={handleSubmit(submitReview)}
-                className="card bg-base-200 w-xl mx-auto shadow-xl p-4 space-y-4"
+                className="card bg-base-200 lg:w-xl mx-auto shadow-xl p-4 space-y-4"
             >
 
                 {/* Reviewer Image URL */}
