@@ -17,6 +17,7 @@ import MyReviews from "../Pages/DashboardLayout/Students/MyReviews";
 import ManageScholarships from "../Pages/DashboardLayout/Admin/ManageScholarships";
 import UpdateScholership from "../Pages/DashboardLayout/Admin/UpdateScholership";
 import ManageUsers from "../Pages/DashboardLayout/Admin/ManageUsers";
+import Analytics from "../Pages/DashboardLayout/Admin/Analytics";
 
 export const router = createBrowserRouter([
     {
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
             {
                 path: "manage-users",
                 Component: ManageUsers
+            },
+            {
+                path: "analytics",
+                Component: Analytics
             },
             // student
             {
