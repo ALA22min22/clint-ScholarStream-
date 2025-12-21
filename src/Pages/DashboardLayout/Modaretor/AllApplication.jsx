@@ -1,123 +1,87 @@
 import React, { useRef, useState } from 'react';
-import UseAuth from '../Hooks/UseAuth';
+import UseAxiosSequre from '../../Hooks/UseAxiosSequre';
 import { useQuery } from '@tanstack/react-query';
-import UseAxiosSequre from '../Hooks/UseAxiosSequre';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { GoCodeReview } from 'react-icons/go';
-import Swal from 'sweetalert2';
-import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import { FcFeedback, FcViewDetails } from 'react-icons/fc';
+import { MdCancelScheduleSend } from 'react-icons/md';
 
-const MyApplications = () => {
+const AllApplication = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const detailsModal = useRef(null);
-    const addReviewes = useRef(null);
+    const feedBackModal = useRef(null);
     const [detaisInfo, setDetailsInfo] = useState(null);
-    const [addReview, setAddReview] = useState(null);
+    const [addFeedback, setFeedback] = useState(null);
 
-    const { user } = UseAuth();
-    const axiosSecure = UseAxiosSequre();
-    const { data: applications = [], refetch } = useQuery({
-        queryKey: ["applications", user?.email],
+    const axiooSecure = UseAxiosSequre();
+    const { data: allAplications = [], refetch } = useQuery({
+        queryKey: ["applications"],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/applications?userEmail=${user.email}`);
+            const res = await axiooSecure.get("/applications");
             return res.data;
         }
     })
-
-
-    const handlePay = async (apply) => {
-        const paymentInfo = {
-            applicationId: apply._id,
-            userEmail: apply.userEmail,
-            scholarshipName: apply.scholarshipName,
-            cost: apply.applicationFees,
-            universityName: apply.universityName,
-            userName: apply.userName
-        }
-
-        const res = await axiosSecure.post("/create-checkout-session", paymentInfo);
-        console.log(res.data)
-        window.location.href = res.data.url;
-    }
-
-    const handleDelete = (id) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able delete this scholership!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosSecure.delete(`/application/${id}`)
-                    .then(res => {
-                        console.log("after delete", res.data)
-                        if (res.data.acknowledged) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your scholer file has been deleted.",
-                                icon: "success"
-                            });
-                            refetch();
-                        }
-                    })
-            }
-        });
-    }
+    // console.log(allAplications)
 
     const handleDetails = (details) => {
         detailsModal.current.showModal();
         setDetailsInfo(details);
     }
 
-    const handleAddReview = (revied) => {
-        addReviewes.current.showModal();
-        setAddReview(revied)
-
+    const handleAddFeedBack = (revied) => {
+        feedBackModal.current.showModal();
+        setFeedback(revied)
     }
 
-    const handleSubmitReview = data => {
-        console.log(data);
 
-        const inserData = {
-            scholarshipId: addReview.scholarshipId,
-            scholarshipName: addReview.scholarshipName,
-            universityName: addReview.universityName,
-            ...data,
+    const handleSubmitFeedback = data => {
+        // console.log(data.feedback);
+
+        const updateData = {
+            feedback: data.feedback
         }
-        axiosSecure.post("/review", inserData)
+        axiooSecure.patch(`/application/${addFeedback._id}`, updateData)
             .then(res => {
-                if (res.data.insertedId) {
-                    console.log("the review data is inserted successfully", res.data);
-                    toast("the review data is inserted successfully");
-                    addReviewes.current.close();
+                if (res.data.modifiedCount) {
+                    console.log("the application feedback is updated successfully", res.data);
+                    toast(`the ${addFeedback?.userName} application feedback is updated successfully`);
+                    feedBackModal.current.close();
+                    refetch();
                     reset();
                 }
             })
     }
 
-    // console.log("review modal details", addReview);
-
+    const handleApplicationStatus = (data, status) => {
+        const updateStatus = {
+            applicationStatus: status
+        }
+        axiooSecure.patch(`/application/application-status/${data._id}`, updateStatus)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    console.log("the application status is updated successfully", res.data);
+                    toast(`the ${data?.userName} application status(${status}) is updated successfully`);
+                    refetch();
+                }
+            })
+    }
 
     return (
         <div>
-            <h2 className="text-5xl font-bold text-black text-center my-10">My all applications</h2>
+            <h3 className="text-5xl font-bold text-primary text-center my-10">All Applications</h3>
+            <div className="border-b text-gray-300 mb-10"></div>
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>NO</th>
+                            <th></th>
+                            <th>Applicant Name</th>
+                            <th>Applicant Email</th>
                             <th>University Name</th>
-                            <th>Scholarship Name</th>
-                            <th>Feedback </th>
-                            <th>Subject Category</th>
-                            <th>Application Fees</th>
+                            <th>Application Feedback</th>
                             <th>Application Status</th>
                             <th>Payment Status</th>
                             <th>Actions</th>
@@ -125,48 +89,42 @@ const MyApplications = () => {
                     </thead>
                     <tbody>
                         {
-                            applications.map((apply, index) => <tr key={apply._id}>
+                            allAplications.map((app, index) => <tr key={app._id}>
                                 <th>{index + 1}</th>
-                                <td className='border-x'>{apply.universityName}</td>
-                                <td className=' text-primary rounded '>{apply.scholarshipName}</td>
-                                <td>{apply.feedback}</td>
-                                <td >{apply.scholarshipCategory}</td>
-
-                                <td className=' btn rounded-full '>${apply.applicationFees}</td>
-
-                                <td className={`${apply.applicationStatus === "pending" && 'text-cyan-700'}
-                                 ${apply.applicationStatus === "processing" && 'text-yellow-400'}
-                                  ${apply.applicationStatus === "completed" && 'text-green-500'} ${apply.applicationStatus === "rejected" && 'text-red-500'}`}>{apply.applicationStatus}</td>
+                                <td className='text-yellow-400'>{app.userName}</td>
+                                <td>{app.userEmail}</td>
+                                <td>{app.universityName}</td>
+                                <td className='text-green-500'>{app?.feedback}</td>
+                                <td className={`${app.applicationStatus === "pending" && 'text-cyan-700'}
+                                 ${app.applicationStatus === "processing" && 'text-yellow-400'}
+                                  ${app.applicationStatus === "completed" && 'text-green-500'} ${app.applicationStatus === "rejected" && 'text-red-500'}`}>{app.applicationStatus}</td>
                                 <td className={`
-                                ${apply.paymentStatus === "unpaid" || apply.paymentStatus === "reject" ? 'text-red-500' : 'text-green-500'}
-                                `}>{apply.paymentStatus}</td>
+                                ${app.paymentStatus === "unpaid" || app.paymentStatus === "reject" ? 'text-red-500' : 'text-green-500'}
+                                `}>{app.paymentStatus}</td>
 
 
-                                <td className='flex  gap-5'>
-                                    {
-                                        apply.applicationStatus === "pending" && apply.paymentStatus === "unpaid" || apply.paymentStatus === "reject" ? <button
-                                            onClick={() => handlePay(apply)} className='btn btn-primary mr-5 text-white'>Pay</button> : ""
-                                    }
-                                    <button onClick={() => handleDetails(apply)} className='btn'>Details</button>
-                                    {
-                                        apply.applicationStatus === "pending" &&
-                                        <button className='btn text-emerald-600'><FaEdit /></button>
-                                    }
+                                <td className='flex gap-3'>
+                                    <button onClick={() => handleDetails(app)} className='btn hover:tooltip' data-tip="Details"><FcViewDetails /></button>
 
-                                    {/* reached only application status is: completed */}
-                                    {
-                                        apply.applicationStatus === "completed" &&
-                                        <button onClick={() => handleAddReview(apply)} className='btn'>Add Review <GoCodeReview /></button>
-                                    }
-                                    {
-                                        apply.applicationStatus === "pending" &&
-                                        <button onClick={() => handleDelete(apply._id)} className='btn text-red-500'><FaTrashAlt /></button>
-                                    }
+                                    <button onClick={() => handleAddFeedBack(app)} className='btn hover:tooltip' data-tip="Feedback"><FcFeedback /></button>
+
+                                    {/* status change */}
+                                    <div className="dropdown dropdown-left dropdown-center hover:tooltip" data-tip="Application Status Update" >
+                                        <div tabIndex={0} role="button" className="btn m-1">Status Update ⬅️</div>
+                                        <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                                            <li><a onClick={() => handleApplicationStatus(app, "processing")}>Processing</a></li>
+                                            <li><a onClick={() => handleApplicationStatus(app, "completed")}>Completed</a></li>
+                                            <li><a onClick={() => handleApplicationStatus(app, "pending")}>Pending</a></li>
+                                        </ul>
+                                    </div>
+
+                                    {/* status reject */}
+                                    <button onClick={() => handleApplicationStatus(app, "rejected")}className='btn text-red-500 hover:tooltip ' data-tip="Rejected Application"><MdCancelScheduleSend /></button>
+
                                 </td>
 
                             </tr>)
                         }
-
 
                     </tbody>
                 </table>
@@ -280,73 +238,30 @@ const MyApplications = () => {
                 </dialog>
             </div>
 
-            {/* --------add review modal---------------- */}
+            {/* --------add Feedback modal---------------- */}
             <div>
-                <dialog ref={addReviewes} className="modal modal-bottom sm:modal-middle">
+                <dialog ref={feedBackModal} className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box w-11/12 max-w-2xl">
                         <form
-                            method='dialog'
-                            onSubmit={handleSubmit(handleSubmitReview)}
+
+                            onSubmit={handleSubmit(handleSubmitFeedback)}
                             className="card bg-base-200 w-xl mx-auto shadow-xl p-4 space-y-4"
                         >
-
-                            {/* Reviewer Image URL */}
+                            {/* Feedback */}
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Image URL</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    value={user?.photoURL}
-                                    placeholder="https://example.com/photo.jpg"
-                                    {...register("reviewerImage")}
-                                    className="input input-bordered w-full"
-                                />
-                            </div>
-
-                            {/* Reviewer Name */}
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    value={user?.displayName}
-                                    placeholder="Your Name"
-                                    {...register("reviewerName", { required: true })}
-                                    className="input input-bordered w-full"
-                                />
-                            </div>
-
-                            {/* Rating */}
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Rating (1-5)</span>
-                                </label>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max="5"
-                                    {...register("rating", { required: true })}
-                                    className="input input-bordered w-full"
-                                />
-                            </div>
-
-                            {/* Comment */}
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Comment</span>
+                                    <span className="label-text">Feedback</span>
                                 </label>
                                 <textarea
                                     placeholder="Write your review..."
-                                    {...register("comment", { required: true })}
+                                    {...register("feedback", { required: true })}
                                     className="textarea textarea-bordered w-full"
                                 ></textarea>
                             </div>
 
                             {/* Submit Button */}
                             <button type="submit" className="btn btn-primary w-full text-white">
-                                Submit Review
+                                Submit Feedback
                             </button>
                         </form>
                         {/* ---------------------------------------------------------- */}
@@ -363,4 +278,4 @@ const MyApplications = () => {
     );
 };
 
-export default MyApplications;
+export default AllApplication;

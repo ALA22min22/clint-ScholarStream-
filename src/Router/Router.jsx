@@ -18,6 +18,8 @@ import ManageScholarships from "../Pages/DashboardLayout/Admin/ManageScholarship
 import UpdateScholership from "../Pages/DashboardLayout/Admin/UpdateScholership";
 import ManageUsers from "../Pages/DashboardLayout/Admin/ManageUsers";
 import Analytics from "../Pages/DashboardLayout/Admin/Analytics";
+import AllApplication from "../Pages/DashboardLayout/Modaretor/AllApplication";
+import AllReviews from "../Pages/DashboardLayout/Modaretor/AllReviews";
 
 export const router = createBrowserRouter([
     {
@@ -86,6 +88,15 @@ export const router = createBrowserRouter([
             {
                 path: "analytics",
                 Component: Analytics
+            },
+            // Modaretor
+            {
+                path: "all-application",
+                Component: AllApplication
+            },
+            {
+                path: "allReviews",
+                Component: AllReviews
             },
             // student
             {

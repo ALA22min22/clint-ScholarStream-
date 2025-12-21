@@ -1,6 +1,6 @@
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { FaShoppingCart, FaUsersCog } from 'react-icons/fa';
+import { FaAppStoreIos, FaShoppingCart, FaStarHalfAlt, FaUsersCog } from 'react-icons/fa';
 import { FcOrganization } from 'react-icons/fc';
 import { GoCodeReview } from 'react-icons/go';
 import { IoIosAddCircle } from 'react-icons/io';
@@ -83,6 +83,19 @@ const Dashboard = () => {
                             <NavLink to={'/dashboard/analytics'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Analytics">
                                 <SiGoogleanalytics />
                                 <span className="is-drawer-close:hidden">Analytics</span>
+                            </NavLink>
+                        </li>
+                        {/* Modaretor */}
+                        <li>
+                            <NavLink to={'/dashboard/all-application'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Application">
+                                <FaAppStoreIos />
+                                <span className="is-drawer-close:hidden">All Application</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/dashboard/allReviews'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Reviews">
+                                <FaStarHalfAlt />
+                                <span className="is-drawer-close:hidden">All Reviews</span>
                             </NavLink>
                         </li>
 
