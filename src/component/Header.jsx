@@ -58,8 +58,8 @@ const Header = () => {
                         <div className="dropdown dropdown-end ">
                             <div tabIndex={0} role="button" className=""><img className='w-[45px] h-[45px] rounded-full' src={user.photoURL} alt="" /></div>
                             <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 text-black shadow-sm">
-                                <li><Link to={"/dashboard/myProfile"}>Dashboard</Link></li>
-                                <li><a onClick={handleLogout} className=" ">LogOut</a></li>
+                                <li><Link to={"/dashboard/myProfile"} className='btn hover:bg-primary hover:text-white'>Dashboard</Link></li>
+                                <li><a onClick={handleLogout} className="  btn hover:bg-primary hover:text-white">LogOut</a></li>
                             </ul>
                         </div>
                     }
