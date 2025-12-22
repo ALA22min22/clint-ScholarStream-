@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Link, NavLink, useNavigate } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import Logo from './Logo';
 import UseAuth from '../Pages/Hooks/UseAuth';
 
@@ -7,7 +7,7 @@ import UseAuth from '../Pages/Hooks/UseAuth';
 
 
 const Header = () => {
-    const {user, logOuth} = UseAuth();
+    const { user, logOuth } = UseAuth();
     const navigate = useNavigate();
     const links = <>
         <li><NavLink to={"/home"}>Home</NavLink></li>
@@ -21,15 +21,15 @@ const Header = () => {
         }
 
     </>
-    const handleLogout = ()=> {
+    const handleLogout = () => {
         logOuth()
-        .then(() => {
-            // alert("user logout sucessfull", result)
-            navigate("/login")
-        })
-        .catch(error => {
-            console.log(error)
-        })
+            .then(() => {
+                // alert("user logout sucessfull", result)
+                navigate("/login")
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
     return (
         <div className="navbar bg-secondary  text-white shadow-sm">
@@ -51,11 +51,25 @@ const Header = () => {
                     {links}
                 </ul>
             </div>
-            <div className="navbar-end gap-2">
+            <div className="navbar-end gap-2  ">
+                <div className='mr-5'>
+                    {
+                        user &&
+                        <div className="dropdown dropdown-end ">
+                            <div tabIndex={0} role="button" className=""><img className='w-[45px] h-[45px] rounded-full' src={user.photoURL} alt="" /></div>
+                            <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 text-black shadow-sm">
+                                <li><Link to={"/dashboard/myProfile"}>Dashboard</Link></li>
+                                <li><a onClick={handleLogout} className=" ">LogOut</a></li>
+                            </ul>
+                        </div>
+                    }
+                </div>
                 {
-                    user? <a onClick={handleLogout} className="btn">LogOut</a> : <Link to={'/login'}><a className="btn">LogIn</a></Link>
+                    user ? "" : <><Link to={'/login'}><a className="btn btn-primary text-white">LogIn</a></Link>
+                    <Link to={"/register"} className="btn btn-primary text-white">Register</Link>
+                    </>
                 }
-                {/* <Link to={"/login"} className="btn">LogIn</Link */}
+                
             </div>
         </div>
     );
