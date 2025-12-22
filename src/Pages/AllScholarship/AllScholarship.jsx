@@ -1,30 +1,83 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { Link } from 'react-router';
-import UseAxiosSequre from '../Hooks/UseAxiosSequre';
-import Loading from '../../component/Loading';
+import React, { useState } from 'react';
+import {  Link } from 'react-router';
+import axios from 'axios';
+// import Loading from '../../component/Loading';
 
 const AllScholarship = () => {
-    const axiooSecure = UseAxiosSequre();
-    const { data: allScho = [], isLoading } = useQuery({
-        queryKey: ["scholarships"],
+  
+
+    const publicAxios = axios.create({
+        baseURL: "http://localhost:5000"
+    });
+
+    const [searchData, setSearchData] = useState("");
+    const [sortField, setSortField] = useState("postDate");
+    const [sortOrder, setSortOrder] = useState("desc");
+    const [page, setPage] = useState(1);
+    const limit = 10;
+    
+
+    const { data, isError } = useQuery({
+        queryKey: ["scholarships", searchData, sortField, sortOrder, page],
         queryFn: async () => {
-            const res = await axiooSecure.get("/scholarships");
+            const res = await publicAxios.get((searchData || sortField || sortOrder || page) ? `/search-scholarships?searchData=${searchData}&sortField=${sortField}&sortOrder=${sortOrder}&page=${page}&limit=${limit}` : "/search-scholarships");
             return res.data;
         }
     })
 
-    if (isLoading) {
-        return <Loading></Loading>
+    const allScho = data?.result || [];
+     const totalPage = Math.ceil(data?.total / limit);
+    const pageNumber = Array.from({length : totalPage});
+   
+
+    
+
+    if (isError) {
+        return <div>Error is here in the data......</div>
     }
 
     // console.log("all scho data", allScho);
 
     return (
         <div>
-            <div>
-                <h3 className='text-5xl font-bold text-center my-10 text-primary'>All Scholersiph</h3>
-            </div>
+            <section className='flex justify-between items-center mt-10'>
+                {/* <!-- From Uiverse.io by AtharvaMistry --> */}
+                <input
+                    onChange={(e) => setSearchData(e.target.value)}
+                    className="rounded-full text-xl border-2 border-primary p-4 placeholder-primary focus:text-violet-950 focus:border-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    placeholder="Search by Scholarship Name, University Name, or Degree..."
+                />
+                <h3 className='text-5xl font-bold   text-primary'>All Scholersiph</h3>
+
+                <div className="dropdown dropdown-hover">
+                    <div tabIndex={0} role="button" className="btn m-1">Sort Options</div>
+                    <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                        <li>
+                            <button onClick={() => { setSortField("postDate"); setSortOrder("asc"); }}>
+                                Post Date (Asc)
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={() => { setSortField("postDate"); setSortOrder("desc"); }}>
+                                Post Date (Desc)
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={() => { setSortField("applicationFees"); setSortOrder("asc"); }}>
+                                Application Fees (Asc)
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={() => {setSortField("applicationFees"); setSortOrder("desc");}}>
+                                Application Fees (Desc)
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+
             <div className='border-b border-gray-500 my-10 '></div>
 
             <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 '>
@@ -72,6 +125,18 @@ const AllScholarship = () => {
                     </div>)
                 }
             </div>
+
+            <section className='flex justify-center items-center mt-10'>
+                <div>
+                {
+                    pageNumber.map((_, index)=> (
+                        <button className='btn mr-2 hover:bg-red-500 bg' onClick={()=> setPage(index + 1)}>
+                            {index + 1}
+                        </button>
+                    ))
+                }
+                </div>
+            </section>
 
         </div>
     );

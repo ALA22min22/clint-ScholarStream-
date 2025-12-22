@@ -13,7 +13,7 @@ const AuthenticationLayout = () => {
                     <Outlet></Outlet>
                 </div>
                 <div>
-                    <img src={auth} alt="" />
+                    <img className='w-auto h-auto' src={auth} alt="" />
                 </div>
             </div>
         </div>

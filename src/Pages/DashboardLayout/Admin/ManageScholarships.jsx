@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import UseAxiosSequre from '../../Hooks/UseAxiosSequre';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router';
@@ -7,19 +7,27 @@ import { FaTrashArrowUp } from 'react-icons/fa6';
 import UpdateScholership from './UpdateScholership';
 import AddScholarship from '../../AllScholarship/AddScholarship';
 import Swal from 'sweetalert2';
+import Loading from '../../../component/Loading';
 
 
 const ManageScholarships = () => {
 
     const navigate = useNavigate();
     const axiooSecure = UseAxiosSequre();
-    const { data: scholarships = [], refetch } = useQuery({
+    const { data: scholarships = [], refetch, isLoading, isError } = useQuery({
         queryKey: ["scholarships"],
         queryFn: async () => {
             const res = await axiooSecure.get('/scholarships');
             return res.data;
         }
     })
+
+    if(isLoading){
+        return <Loading></Loading>
+    }
+    if(isError){
+        return <div>Error is here in the data......</div>
+    }
 
     const handaleUpdate = scholer => {
         navigate('/dashboard/update-scholarships', { state: scholer })

@@ -20,6 +20,8 @@ import ManageUsers from "../Pages/DashboardLayout/Admin/ManageUsers";
 import Analytics from "../Pages/DashboardLayout/Admin/Analytics";
 import AllApplication from "../Pages/DashboardLayout/Modaretor/AllApplication";
 import AllReviews from "../Pages/DashboardLayout/Modaretor/AllReviews";
+import AdminPrivateRoute from "../Provider/AdminPrivateRoute";
+import ModaretorPrivateRoute from "../Provider/ModaretorPrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -66,42 +68,42 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: 'myProfile',
-                element: <PrivateRoute> <MyProfile></MyProfile> </PrivateRoute>
+                element:  <MyProfile></MyProfile> 
             },
             // admin
             {
                 path: "addScholarship",
-                Component: AddScholarship
+                element: <AdminPrivateRoute> <AddScholarship></AddScholarship> </AdminPrivateRoute>
             },
             {
                 path: "manage-scholarships",
-                Component: ManageScholarships
+                element: <AdminPrivateRoute> <ManageScholarships></ManageScholarships> </AdminPrivateRoute>
             },
             {
                 path: "update-scholarships",
-                Component: UpdateScholership
+                element: <AdminPrivateRoute> <UpdateScholership></UpdateScholership> </AdminPrivateRoute>
             },
             {
                 path: "manage-users",
-                Component: ManageUsers
+                element: <AdminPrivateRoute> <ManageUsers></ManageUsers> </AdminPrivateRoute>
             },
             {
                 path: "analytics",
-                Component: Analytics
+                element: <AdminPrivateRoute> <Analytics></Analytics> </AdminPrivateRoute>
             },
             // Modaretor
             {
                 path: "all-application",
-                Component: AllApplication
+                element: <ModaretorPrivateRoute> <AllApplication></AllApplication> </ModaretorPrivateRoute>
             },
             {
                 path: "allReviews",
-                Component: AllReviews
+                element: <ModaretorPrivateRoute> <AllReviews></AllReviews> </ModaretorPrivateRoute>
             },
             // student
             {
                 path: "myApplications",
-                element: <PrivateRoute> <MyApplications></MyApplications> </PrivateRoute>
+                element:  <MyApplications></MyApplications> 
             },
             {
                 path: "myReview",

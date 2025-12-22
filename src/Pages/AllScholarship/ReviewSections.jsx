@@ -5,7 +5,7 @@ import Loading from '../../component/Loading';
 
 const ReviewSections = ({ scholarship }) => {
     const axiosSecure = UseAxiosSequre();
-    const { data: review = [], isLoading, refetch } = useQuery({
+    const { data: review = [], isLoading, refetch, isError } = useQuery({
         queryKey: ["review", scholarship._id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/review/${scholarship._id}`);
@@ -15,6 +15,10 @@ const ReviewSections = ({ scholarship }) => {
 
     if(isLoading){
       return  <Loading></Loading>
+    }
+    
+    if(isError){
+        return <div>Error is here in the data......</div>
     }
     refetch();
 

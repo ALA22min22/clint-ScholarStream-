@@ -7,6 +7,7 @@ import { FaTrashArrowUp } from 'react-icons/fa6';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
+import Loading from '../../../component/Loading';
 
 const MyReviews = () => {
     const [reviewData, setReviewData] = useState(null);
@@ -16,21 +17,26 @@ const MyReviews = () => {
 
     const { user } = UseAuth();
     const axiooSecure = UseAxiosSequre();
-    const { data: myReviews = [], refetch } = useQuery({
+    const { data: myReviews = [], refetch, isError, isLoading } = useQuery({
         queryKey: ["my-review", user?.displayName],
         queryFn: async () => {
             const res = await axiooSecure.get(`/my-review?reviewerName=${user.displayName}`);
             return res.data;
         }
     })
-    // console.log("my Reviews: ", myReviews);
+
+    if(isLoading){
+        return <Loading></Loading>
+    }
+    if(isError){
+        return <div>Error is here in the data......</div>
+    }
 
     const handleUpdateReview = (currentInfo) => {
         myRef.current.showModal();
         setReviewData(currentInfo);
     }
 
-    // console.log("current review data:", reviewData)
 
     const handleUpdateForm = async (data) => {
         console.log(data);

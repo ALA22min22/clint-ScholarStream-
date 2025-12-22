@@ -6,8 +6,10 @@ import { GoCodeReview } from 'react-icons/go';
 import { IoIosAddCircle } from 'react-icons/io';
 import { SiGoogleanalytics } from 'react-icons/si';
 import { NavLink, Outlet } from 'react-router';
+import UseRole from '../Hooks/UseRole';
 
 const Dashboard = () => {
+    const { role } = UseRole();
     return (
         <div className="drawer lg:drawer-open max-w-7xl mx-auto">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -41,63 +43,75 @@ const Dashboard = () => {
                         {/* My  */}
                         <li>
                             <NavLink to={'/dashboard/myProfile'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Profile">
-                                <CgProfile />
+                                <CgProfile className='text-green-500 rounded-full' />
                                 <span className="is-drawer-close:hidden">My Profile</span>
                             </NavLink>
                         </li>
 
                         {/* Student */}
-                        <li>
-                            <NavLink to={'/dashboard/myApplications'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
-                                <FaShoppingCart />
-                                <span className="is-drawer-close:hidden">My Applications</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/dashboard/myReview'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Review">
-                                <GoCodeReview />
-                                <span className="is-drawer-close:hidden">My Review</span>
-                            </NavLink>
-                        </li>
+                        {
+                            role === "student" && <>
+                                <li>
+                                    <NavLink to={'/dashboard/myApplications'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
+                                        <FaShoppingCart className='text-red-500' />
+                                        <span className="is-drawer-close:hidden">My Applications</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={'/dashboard/myReview'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Review">
+                                        <GoCodeReview />
+                                        <span className="is-drawer-close:hidden">My Review</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
 
                         {/* Admin */}
-                        <li>
-                            <NavLink to={'/dashboard/addScholarship'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Scholarship">
-                                <IoIosAddCircle />
-                                <span className="is-drawer-close:hidden">Add Scholarship</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/dashboard/manage-scholarships'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Scholarships">
-                                <FcOrganization />
-                                <span className="is-drawer-close:hidden">Manage Scholarships</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/dashboard/manage-users'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users">
-                                <FaUsersCog />
-                                <span className="is-drawer-close:hidden">Manage Users</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/dashboard/analytics'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Analytics">
-                                <SiGoogleanalytics />
-                                <span className="is-drawer-close:hidden">Analytics</span>
-                            </NavLink>
-                        </li>
+                        {
+                            role === "admin" && <>
+                                <li>
+                                    <NavLink to={'/dashboard/addScholarship'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Scholarship">
+                                        <IoIosAddCircle className='text-blue-500' />
+                                        <span className="is-drawer-close:hidden">Add Scholarship</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={'/dashboard/manage-scholarships'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Scholarships">
+                                        <FcOrganization />
+                                        <span className="is-drawer-close:hidden">Manage Scholarships</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={'/dashboard/manage-users'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users">
+                                        <FaUsersCog className='text-cyan-500' />
+                                        <span className="is-drawer-close:hidden">Manage Users</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={'/dashboard/analytics'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Analytics">
+                                        <SiGoogleanalytics className='text-red-500' />
+                                        <span className="is-drawer-close:hidden">Analytics</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
                         {/* Modaretor */}
-                        <li>
-                            <NavLink to={'/dashboard/all-application'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Application">
-                                <FaAppStoreIos />
-                                <span className="is-drawer-close:hidden">All Application</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/dashboard/allReviews'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Reviews">
-                                <FaStarHalfAlt />
-                                <span className="is-drawer-close:hidden">All Reviews</span>
-                            </NavLink>
-                        </li>
+                        {
+                            role === 'modaretor' && <>
+                                <li>
+                                    <NavLink to={'/dashboard/all-application'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Application">
+                                        <FaAppStoreIos />
+                                        <span className="is-drawer-close:hidden">All Application</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={'/dashboard/allReviews'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Reviews">
+                                        <FaStarHalfAlt className='text-yellow-400' />
+                                        <span className="is-drawer-close:hidden">All Reviews</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
 
 
                         {/*-------------------------------------------------------------- */}

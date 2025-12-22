@@ -8,14 +8,18 @@ import Swal from 'sweetalert2';
 const ManageUsers = () => {
     const [selectedRole, setSelectedRole] = useState("");
     const axiooSecure = UseAxiosSequre();
-    const { data: allUsers = [], refetch } = useQuery({
+    const { data, refetch} = useQuery({
         queryKey: ["users", selectedRole],
         queryFn: async () => {
             const res = await axiooSecure.get(selectedRole ? `/admin-users?role=${selectedRole}` : "/admin-users");
+            console.log("allUsers:", allUsers);
             return res.data;
         }
     })
-    // console.log(allUsers)
+    
+    const allUsers = Array.isArray(data) ? data : [];
+
+    
 
     // role change
     const handleUserRoleChange = async (user, role) => {

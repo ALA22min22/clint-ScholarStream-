@@ -7,6 +7,7 @@ import { GoCodeReview } from 'react-icons/go';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
+import Loading from '../../component/Loading';
 
 const MyApplications = () => {
     const { register, handleSubmit, reset } = useForm();
@@ -18,7 +19,7 @@ const MyApplications = () => {
 
     const { user } = UseAuth();
     const axiosSecure = UseAxiosSequre();
-    const { data: applications = [], refetch } = useQuery({
+    const { data: applications = [], refetch, isError, isLoading } = useQuery({
         queryKey: ["applications", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/applications?userEmail=${user.email}`);
@@ -26,6 +27,12 @@ const MyApplications = () => {
         }
     })
 
+    if(isLoading){
+        return <Loading></Loading>
+    }
+    if(isError){
+        return <div>Error is here in the data......</div>
+    }
 
     const handlePay = async (apply) => {
         const paymentInfo = {

@@ -42,8 +42,8 @@ const Analytics = () => {
             <p className="my-4 text-gray-500 text-2xl">Visualize Platform Data</p>
             <section className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5'>
                 <div className=' rounded-3xl  py-5 px-0 text-center bg-white  text-4xl font-bold font-mono shadow-lg '> <span className='text-2xl  '>Total Users</span> <br /> {analytics.totalUsers}</div>
-                <div className=' rounded-3xl  py-5 px-0 text-center bg-white  text-4xl font-bold font-mono shadow-lg'> <span className='text-2xl  '>Total Users</span> <br /> ${analytics.totalFees}</div>
-                <div className=' rounded-3xl  py-5 px-0 text-center bg-white  text-4xl font-bold font-mono shadow-lg'> <span className='text-2xl  '>Total Users</span> <br /> {analytics.totalScholersiph}</div>
+                <div className=' rounded-3xl  py-5 px-0 text-center bg-white  text-4xl font-bold font-mono shadow-lg'> <span className='text-2xl  '>Total Fees</span> <br /> ${analytics.totalFees}</div>
+                <div className=' rounded-3xl  py-5 px-0 text-center bg-white  text-4xl font-bold font-mono shadow-lg'> <span className='text-2xl  '>Total Scholarship</span> <br /> {analytics.totalScholersiph}</div>
             </section>
 
             <section className=' bg-white shadow-lg rounded-3xl mt-10 py-4 '>

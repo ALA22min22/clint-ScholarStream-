@@ -12,28 +12,29 @@ const UseAxiosSequre = () => {
     //some work like token
 
     useEffect(() => {
-      const interceptoRequest =  axiosSecure.interceptors.request.use((config) => {
-            config.headers.Authorization = `Bearer ${user?.accessToken}`
+        const interceptorRequest = axiosSecure.interceptors.request.use((config) => {
+            config.headers.Authorization = `Bearer ${user.accessToken}`
             return config
         })
 
-     const interceptorResponce = axiosSecure.interceptors.response.use((response)=>{
+        const interceptorResponse = axiosSecure.interceptors.response.use((response) => {
 
             return response
         },
-    (error)=>{
-        console.log('interceptor response faild', error)
-        const status = error.status;
-        if(status === 401 || status === 403){
-            logOuth()
+            (error) => {
+                console.log('interceptor response faild', error)
+                const status = error.response?.status;
+                console.log("error.response:", error.response);
+                if (status === 401 || status === 403) {
+                    logOuth()
+                }
+                return Promise.reject(error);
+            })
+        //remove interceptor:
+        return () => {
+            axiosSecure.interceptors.request.eject(interceptorRequest);
+            axiosSecure.interceptors.response.eject(interceptorResponse);
         }
-        return Promise.reject(error);
-    })
-    //remove interceptor:
-    return ()=>{
-        axiosSecure.interceptors.request.eject(interceptoRequest);
-        axiosSecure.interceptors.response.eject(interceptorResponce);
-    }
     }, [user, logOuth])
 
     return axiosSecure;

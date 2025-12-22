@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Link, NavLink } from 'react-router';
+import {  Link, NavLink, useNavigate } from 'react-router';
 import Logo from './Logo';
 import UseAuth from '../Pages/Hooks/UseAuth';
 
@@ -8,6 +8,7 @@ import UseAuth from '../Pages/Hooks/UseAuth';
 
 const Header = () => {
     const {user, logOuth} = UseAuth();
+    const navigate = useNavigate();
     const links = <>
         <li><NavLink to={"/home"}>Home</NavLink></li>
         <li><NavLink to={'/allScholarship'}>All Scholarship </NavLink></li>
@@ -22,9 +23,9 @@ const Header = () => {
     </>
     const handleLogout = ()=> {
         logOuth()
-        .then(result => {
-            alert("user logout sucessfull", result)
-            
+        .then(() => {
+            // alert("user logout sucessfull", result)
+            navigate("/login")
         })
         .catch(error => {
             console.log(error)
