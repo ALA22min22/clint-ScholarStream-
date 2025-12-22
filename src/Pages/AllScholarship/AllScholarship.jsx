@@ -8,7 +8,7 @@ const AllScholarship = () => {
   
 
     const publicAxios = axios.create({
-        baseURL: "https://scolership-server.vercel.app"
+        baseURL: " http://localhost:5000"
     });
 
     const [searchData, setSearchData] = useState("");
