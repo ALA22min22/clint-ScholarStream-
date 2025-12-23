@@ -22,6 +22,7 @@ import AllApplication from "../Pages/DashboardLayout/Modaretor/AllApplication";
 import AllReviews from "../Pages/DashboardLayout/Modaretor/AllReviews";
 import AdminPrivateRoute from "../Provider/AdminPrivateRoute";
 import ModaretorPrivateRoute from "../Provider/ModaretorPrivateRoute";
+import Successer from "../Pages/NavBarPages/Home/Successer";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             {
                 path: "scholarships/:id",
                 element: <PrivateRoute> <ScholershipDetails></ScholershipDetails> </PrivateRoute>
+            },
+            {
+                path: "successer",
+                Component: Successer
             }
             
            

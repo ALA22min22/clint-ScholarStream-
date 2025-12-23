@@ -17,7 +17,7 @@ const Login = () => {
         login(data.email, data.password)
         .then(result => {
             console.log("login sucessfull",result.user);
-            navigate(location.state? location.state : "/")
+            navigate(location.state? location.state : "/home")
         })
         .catch(error => {
             toast(`login faild : ${error}`)

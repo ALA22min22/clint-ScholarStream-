@@ -58,8 +58,8 @@ const Register = () => {
                             .then(() => {
                                 console.log('update profile sucessfull')
                                 setTimeout(()=>{
-                                    navigate(locations.state ? locations.state : '/')
-                                }, 1500)
+                                    navigate(locations.state ? locations.state : '/home')
+                                }, 800)
                             })
                             .catch(error => {
                                 alert('update profile faild', error)

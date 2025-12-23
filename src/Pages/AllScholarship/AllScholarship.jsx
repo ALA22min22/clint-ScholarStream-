@@ -1,14 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import {  Link } from 'react-router';
+import { Link } from 'react-router';
 import axios from 'axios';
+import Loading from '../../component/Loading';
 // import Loading from '../../component/Loading';
 
 const AllScholarship = () => {
-  
+
 
     const publicAxios = axios.create({
-        baseURL: " http://localhost:5000"
+        baseURL: "   https://scolership-server.vercel.app"
     });
 
     const [searchData, setSearchData] = useState("");
@@ -16,9 +17,9 @@ const AllScholarship = () => {
     const [sortOrder, setSortOrder] = useState("desc");
     const [page, setPage] = useState(1);
     const limit = 10;
-    
 
-    const { data, isError } = useQuery({
+
+    const { data, isError, isLoading } = useQuery({
         queryKey: ["scholarships", searchData, sortField, sortOrder, page],
         queryFn: async () => {
             const res = await publicAxios.get((searchData || sortField || sortOrder || page) ? `/search-scholarships?searchData=${searchData}&sortField=${sortField}&sortOrder=${sortOrder}&page=${page}&limit=${limit}` : "/search-scholarships");
@@ -27,11 +28,13 @@ const AllScholarship = () => {
     })
 
     const allScho = data?.result || [];
-     const totalPage = Math.ceil(data?.total / limit);
-    const pageNumber = Array.from({length : totalPage});
-   
+    const totalPage = Math.ceil(data?.total / limit);
+    const pageNumber = Array.from({ length: totalPage });
 
-    
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     if (isError) {
         return <div>Error is here in the data......</div>
@@ -39,15 +42,18 @@ const AllScholarship = () => {
 
     // console.log("all scho data", allScho);
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        setSearchData(e.target.search.value)
+    }
+
     return (
         <div>
-            <section className='flex justify-between items-center mt-10'>
-                {/* <!-- From Uiverse.io by AtharvaMistry --> */}
-                <input
-                    onChange={(e) => setSearchData(e.target.value)}
-                    className="rounded-full text-xl border-2 border-primary p-4 placeholder-primary focus:text-violet-950 focus:border-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    placeholder="Search by Scholarship Name, University Name, or Degree..."
-                />
+            <section className='flex justify-between items-center mt-10 max-w-6xl mx-auto'>
+                
+                
+
+
                 <h3 className='text-5xl font-bold   text-primary'>All Scholersiph</h3>
 
                 <div className="dropdown dropdown-hover">
@@ -69,7 +75,7 @@ const AllScholarship = () => {
                             </button>
                         </li>
                         <li>
-                            <button onClick={() => {setSortField("applicationFees"); setSortOrder("desc");}}>
+                            <button onClick={() => { setSortField("applicationFees"); setSortOrder("desc"); }}>
                                 Application Fees (Desc)
                             </button>
                         </li>
@@ -80,7 +86,7 @@ const AllScholarship = () => {
 
             <div className='border-b border-gray-500 my-10 '></div>
 
-            <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 '>
+            <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 '>
                 {
                     allScho.map(schol => <div key={schol._id} class="card  bg-base-400 text-white shadow-xl hover:shadow-2xl transition-shadow duration-300 card-bordered border-base-200">
                         <figure class="h-48 relative overflow-hidden">
@@ -128,13 +134,13 @@ const AllScholarship = () => {
 
             <section className='flex justify-center items-center mt-10'>
                 <div>
-                {
-                    pageNumber.map((_, index)=> (
-                        <button className='btn mr-2 hover:bg-red-500 bg' onClick={()=> setPage(index + 1)}>
-                            {index + 1}
-                        </button>
-                    ))
-                }
+                    {
+                        pageNumber.map((_, index) => (
+                            <button className='btn mr-2 hover:bg-red-500 bg' onClick={() => setPage(index + 1)}>
+                                {index + 1}
+                            </button>
+                        ))
+                    }
                 </div>
             </section>
 
