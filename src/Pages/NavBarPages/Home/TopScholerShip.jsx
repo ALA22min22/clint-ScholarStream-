@@ -6,7 +6,7 @@ import Loading from '../../../component/Loading';
 
 const TopScholerShip = () => {
     const publicAxios = axios.create({
-        baseURL: "http://localhost:50000"
+        baseURL: "https://scolership-server.vercel.app0"
     });
     const { data: topSchol = [], isLoading } = useQuery({
         queryKey: ["scholership-home"],
@@ -28,7 +28,7 @@ const TopScholerShip = () => {
         <div>
             <h3 className='text-5xl font-bold text-primary text-center my-10'>Top Scholarships</h3>
             <div 
-            className='grid grid-cols-3 justify-center items-center gap-5 max-w-6xl mx-auto'
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-5 max-w-6xl mx-auto'
             >
                 {
                     topSchol.map(top => <div 
