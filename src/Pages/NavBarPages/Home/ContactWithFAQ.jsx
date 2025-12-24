@@ -38,7 +38,10 @@ const ContactWithFAQ = () => {
             <div className="container mx-auto px-4">
 
                 <div className="text-center mb-10">
-                    <h2 className="text-4xl font-bold text-primary mb-4">Get in Touch</h2>
+                    <motion.h2 initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, ease: "easeOut" }}
+                        whileHover={{ scale: 1.05, color: "#f97316" }} className="text-4xl font-bold text-primary mb-4">Get in Touch</motion.h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Have questions about Scholar Stream? Check our FAQ below or send us a message directly. We are here to help you succeed.
                     </p>
@@ -46,7 +49,8 @@ const ContactWithFAQ = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
-                    <div className="space-y-4">
+                    <motion.div whileHover={{ scale: 1.2, y: -10 }}
+                        transition={{ type: "spring", stiffness: 200 }} className="space-y-4">
                         <h3 className="text-2xl font-bold text-gray-800 mb-4 px-2">Frequently Asked Questions</h3>
 
                         {faqData.map((item, index) => (
@@ -60,9 +64,10 @@ const ContactWithFAQ = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </motion.div>
 
-                    <div className="card w-full bg-base-100 shadow-xl border border-base-300">
+                    <motion.div whileHover={{ scale: 1.2, y: -10 }}
+                        transition={{ type: "spring", stiffness: 200 }} className="card w-full bg-base-100 shadow-xl border border-base-300">
                         <div className="card-body">
                             <h3 className="text-2xl font-bold text-primary mb-2">Send us a Message</h3>
                             <p className="text-gray-500 mb-6">We usually respond within 24 hours.</p>
@@ -121,7 +126,7 @@ const ContactWithFAQ = () => {
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </motion.div>
 
                 </div>
             </div>

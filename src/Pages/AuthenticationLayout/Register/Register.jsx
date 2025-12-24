@@ -30,7 +30,7 @@ const Register = () => {
                 const formData = new FormData();  //store
                 formData.append('image', photoURL)
 
-                const send_Store_image = `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_API_KEY}`; //send to the store.
+                const send_Store_image = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_API_KEY}`; //send to the store.
                 //image send to the imageBB help with axios post --------3----------------
                 axios.post(send_Store_image, formData)
                     .then(res => {
@@ -89,7 +89,7 @@ const Register = () => {
                             {/* photo url */}
                             <label className="label">Photo</label>
 
-                            <input type="file" {...register('photo', { required: true })} className="file-input" placeholder="Photo URL" />
+                            <input type="file" {...register('photo', { required: true })} className="file-input w-full" placeholder="Photo URL" />
                             {
                                 errors.photo?.type === "required" && <p className='text-red-500'>PhotoURL is required</p>
                             }
@@ -105,7 +105,7 @@ const Register = () => {
                             <label className="label">Password</label>
                             <input type="password" {...register('password', {
                                 required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
-                            })} className="input" placeholder="Password" />
+                            })} className="input w-full" placeholder="Password" />
                             {
                                 errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>
                             }

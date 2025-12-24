@@ -17,7 +17,7 @@ const AddScholarship = () => {
         const formData = new FormData();
         formData.append("image", photoURL);
 
-        const send_to_store_image = `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_API_KEY}`;
+        const send_to_store_image = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_API_KEY}`;
 
         //send to imgBB
         axios.post(send_to_store_image, formData)

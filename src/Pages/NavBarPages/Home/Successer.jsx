@@ -6,7 +6,7 @@ import Loading from '../../../component/Loading';
 
 const Successer = () => {
     const publicAxios = axios.create({
-        baseURL: "https://scolership-server.vercel.app0"
+        baseURL: "https://scolership-server.vercel.app"
     });
 
     const { data: success = [], isLoading } = useQuery({

@@ -40,7 +40,7 @@ const Login = () => {
 
                             {/* password */}
                             <label className="label">Password</label>
-                            <input type="password" {...register('password', { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/ })} className="input" placeholder="Password" />
+                            <input type="password" {...register('password', { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/ })} className="input w-full" placeholder="Password" />
                             {
                                 errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>
                             }

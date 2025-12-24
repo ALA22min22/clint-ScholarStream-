@@ -6,7 +6,7 @@ import Loading from '../../../component/Loading';
 
 const TopScholerShip = () => {
     const publicAxios = axios.create({
-        baseURL: "https://scolership-server.vercel.app0"
+        baseURL: "https://scolership-server.vercel.app"
     });
     const { data: topSchol = [], isLoading } = useQuery({
         queryKey: ["scholership-home"],
