@@ -64,7 +64,7 @@ const ManageScholarships = () => {
 
     return (
         <div>
-            <h3 className='text-5xl font-bold text-primary text-center my-10 '>Manage Scholership</h3>
+            <h3 className='text-5xl font-bold text-primary text-center mt-10 '>Manage Scholership</h3>
             <div className='border-b border-gray-300 my-10'></div>
             <div className="overflow-x-auto">
                 <table className="table">

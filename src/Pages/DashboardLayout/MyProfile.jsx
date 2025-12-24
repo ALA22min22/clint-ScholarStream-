@@ -24,7 +24,7 @@ const MyProfile = () => {
 
     return (
         <div>
-            <h3 className='text-5xl font-bold text-primary text-center mt-10 '>My profile</h3>
+            <h3 className='text-5xl font-bold text-primary text-center mt-10 '>My Profile</h3>
             <div className='border-b border-gray-300 mt-10'></div>
             {
                 myData.map(user => <div className="flex justify-center items-center min-h-screen bg-base-200 py-10">

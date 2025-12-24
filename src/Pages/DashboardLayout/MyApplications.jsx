@@ -112,8 +112,8 @@ const MyApplications = () => {
 
     return (
         <div>
-            <h2 className="text-5xl font-bold text-black text-center my-10">My all applications</h2>
-
+            <h2 className="text-5xl font-bold text-primary text-center mt-10">My All Applications</h2>
+            <div className='border-b border-gray-300 my-10'></div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}
