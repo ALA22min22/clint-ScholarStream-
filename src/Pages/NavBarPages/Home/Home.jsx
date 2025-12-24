@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from './HeroSection';
 import TopScholerShip from './TopScholerShip';
 import { Link } from 'react-router';
+import ContactWithFAQ from './ContactWithFAQ';
 
 const Home = () => {
     return (
@@ -31,6 +32,9 @@ const Home = () => {
 
 
                 </div>
+            </div>
+            <div>
+                <ContactWithFAQ></ContactWithFAQ>
             </div>
         </div>
     );

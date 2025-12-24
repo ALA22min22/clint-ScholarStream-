@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
 import Logo from './Logo';
 import UseAuth from '../Pages/Hooks/UseAuth';
+import { motion } from "framer-motion";
 
 
 
@@ -65,11 +66,13 @@ const Header = () => {
                     }
                 </div>
                 {
-                    user ? "" : <><Link to={'/login'}><a className="btn btn-primary text-white">LogIn</a></Link>
-                    <Link to={"/register"} className="btn btn-primary text-white">Register</Link>
+                    user ? "" : <><Link to={'/login'}><a className="btn btn-primary text-white"> <motion.p whileHover={{ scale: 1.2, y: -10 }}
+                        transition={{ type: "spring", stiffness: 200 }} >LogIn</motion.p> </a></Link>
+                        <Link to={"/register"} className="btn btn-primary text-white"> <motion.p whileHover={{ scale: 1.2, y: -10 }}
+                        transition={{ type: "spring", stiffness: 200 }} >Register</motion.p> </Link>
                     </>
                 }
-                
+
             </div>
         </div>
     );

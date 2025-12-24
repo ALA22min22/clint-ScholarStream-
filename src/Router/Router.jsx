@@ -23,6 +23,7 @@ import AllReviews from "../Pages/DashboardLayout/Modaretor/AllReviews";
 import AdminPrivateRoute from "../Provider/AdminPrivateRoute";
 import ModaretorPrivateRoute from "../Provider/ModaretorPrivateRoute";
 import Successer from "../Pages/NavBarPages/Home/Successer";
+import ContactWithFAQ from "../Pages/NavBarPages/Home/ContactWithFAQ";
 
 export const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
             {
                 path: "successer",
                 Component: Successer
+            },
+            {
+                path: "faq",
+                Component: ContactWithFAQ
             }
             
            

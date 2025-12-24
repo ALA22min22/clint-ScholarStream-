@@ -6,10 +6,8 @@ import Loading from '../../component/Loading';
 // import Loading from '../../component/Loading';
 
 const AllScholarship = () => {
-
-
     const publicAxios = axios.create({
-        baseURL: "   https://scolership-server.vercel.app"
+        baseURL: "http://localhost:5000"
     });
 
     const [searchData, setSearchData] = useState("");
@@ -19,7 +17,7 @@ const AllScholarship = () => {
     const limit = 10;
 
 
-    const { data, isError, isLoading } = useQuery({
+    const { data,  isLoading } = useQuery({
         queryKey: ["scholarships", searchData, sortField, sortOrder, page],
         queryFn: async () => {
             const res = await publicAxios.get((searchData || sortField || sortOrder || page) ? `/search-scholarships?searchData=${searchData}&sortField=${sortField}&sortOrder=${sortOrder}&page=${page}&limit=${limit}` : "/search-scholarships");
@@ -36,9 +34,6 @@ const AllScholarship = () => {
         return <Loading></Loading>
     }
 
-    if (isError) {
-        return <div>Error is here in the data......</div>
-    }
 
     // console.log("all scho data", allScho);
 

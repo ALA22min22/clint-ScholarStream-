@@ -5,6 +5,7 @@ import GmailLogin from '../GmailLogin';
 import UseAxiosSequre from '../../Hooks/UseAxiosSequre';
 import UseAuth from '../../Hooks/UseAuth';
 import axios from 'axios';
+import auth from "../../../assets/auth.png";
 import { toast, ToastContainer } from 'react-toastify';
 
 const Register = () => {
@@ -35,7 +36,7 @@ const Register = () => {
                     .then(res => {
                         console.log("after send the img to imgBB", res.data.data.display_url)
                         const imageURL = res.data.data.display_url
-    
+
                         //mongodb post data:
                         const sendData = {
                             email: data.email,
@@ -44,9 +45,9 @@ const Register = () => {
                         }
                         axiooSecure.post('/users', sendData)
                             .then(res => {
-                                if(res.data.insertedId){
+                                if (res.data.insertedId) {
                                     console.log("after user register data save MDB", res.data)
-                                }                              
+                                }
                             })
 
                         // update firebase profile------------4---------------
@@ -57,7 +58,7 @@ const Register = () => {
                         updateUserProfile(updateProfile)
                             .then(() => {
                                 console.log('update profile sucessfull')
-                                setTimeout(()=>{
+                                setTimeout(() => {
                                     navigate(locations.state ? locations.state : '/home')
                                 }, 800)
                             })
@@ -73,56 +74,62 @@ const Register = () => {
     }
 
     return (
-        <div className="card bg-base-100  text-center w-full max-w-sm shrink-0 shadow-2xl ">
-            <h1 className="text-5xl font-bold">Register now!</h1>
-            <div className="card-body">
-                <form onSubmit={handleSubmit(handleRegisterData)}>
-                    <fieldset className="fieldset">
-                        {/* name */}
-                        <label className="label">Name</label>
-                        <input type="text" {...register('name', { required: true })} className="input w-full" placeholder="name" />
-                        {
-                            errors.name?.type === "required" && <p className='text-red-500'>name is required</p>
-                        }
-                        {/* photo url */}
-                        <label className="label">Photo</label>
+        <section className='flex flex-col-reverse md:flex-row lg:flex-row'>
+            <div className="card bg-base-100  text-center w-full max-w-sm shrink-0 shadow-2xl ">
+                <h1 className="text-5xl font-bold">Register now!</h1>
+                <div className="card-body">
+                    <form onSubmit={handleSubmit(handleRegisterData)}>
+                        <fieldset className="fieldset">
+                            {/* name */}
+                            <label className="label">Name</label>
+                            <input type="text" {...register('name', { required: true })} className="input w-full" placeholder="name" />
+                            {
+                                errors.name?.type === "required" && <p className='text-red-500'>name is required</p>
+                            }
+                            {/* photo url */}
+                            <label className="label">Photo</label>
 
-                        <input type="file" {...register('photo', { required: true })} className="file-input" placeholder="Photo URL" />
-                        {
-                            errors.photo?.type === "required" && <p className='text-red-500'>PhotoURL is required</p>
-                        }
-                        {/* email */}
-                        <label className="label">Email</label>
-                        <input type="email" {...register('email', { required: true })} className="input w-full" placeholder="Email" />
-                        {
-                            errors.email?.type === "required" && <p className='text-red-500'>email must be required</p>
-                        }
-
-
-                        {/* password */}
-                        <label className="label">Password</label>
-                        <input type="password" {...register('password', {
-                            required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
-                        })} className="input" placeholder="Password" />
-                        {
-                            errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>
-                        }
-                        {
-                            errors.password?.type === 'minLength' && <p className='text-red-500'>Minimum password length is 6 or more</p>
-                        }
-                        {
-                            errors.password?.type === "pattern" && <p className='text-red-500'>Minimum One Capital letter & One Speacial Cherechters Required</p>
-                        }
+                            <input type="file" {...register('photo', { required: true })} className="file-input" placeholder="Photo URL" />
+                            {
+                                errors.photo?.type === "required" && <p className='text-red-500'>PhotoURL is required</p>
+                            }
+                            {/* email */}
+                            <label className="label">Email</label>
+                            <input type="email" {...register('email', { required: true })} className="input w-full" placeholder="Email" />
+                            {
+                                errors.email?.type === "required" && <p className='text-red-500'>email must be required</p>
+                            }
 
 
-                        <button className="btn btn-neutral mt-4">Register</button>
-                    </fieldset>
-                </form>
-                <GmailLogin></GmailLogin>
-                <p>Already have account in zap shift? <Link state={location.state} to={'/login'} className='text-red-500'>Login</Link></p>
+                            {/* password */}
+                            <label className="label">Password</label>
+                            <input type="password" {...register('password', {
+                                required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
+                            })} className="input" placeholder="Password" />
+                            {
+                                errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>
+                            }
+                            {
+                                errors.password?.type === 'minLength' && <p className='text-red-500'>Minimum password length is 6 or more</p>
+                            }
+                            {
+                                errors.password?.type === "pattern" && <p className='text-red-500'>Minimum One Capital letter & One Speacial Cherechters Required</p>
+                            }
+
+
+                            <button className="btn btn-primary text-white mt-4">Register</button>
+                        </fieldset>
+                    </form>
+                    <GmailLogin></GmailLogin>
+                    <p>Already have account in zap shift? <Link state={location.state} to={'/login'} className='text-blue-500'>Login</Link></p>
+                </div>
+
+                <ToastContainer />
             </div>
-            <ToastContainer />
-        </div>
+            <div>
+                <img className='w-auto h-full' src={auth} alt="" />
+            </div>
+        </section>
     );
 };
 

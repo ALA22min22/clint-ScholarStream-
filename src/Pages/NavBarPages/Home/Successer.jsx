@@ -6,7 +6,7 @@ import Loading from '../../../component/Loading';
 
 const Successer = () => {
     const publicAxios = axios.create({
-        baseURL: "  http://localhost:5000"
+        baseURL: "  http://localhost:50000"
     });
 
     const { data: success = [], isLoading } = useQuery({

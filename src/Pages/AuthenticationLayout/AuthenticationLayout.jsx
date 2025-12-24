@@ -1,21 +1,21 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import Header from '../../component/Header';
-import auth from "../../assets/auth.png";
+import Footer from '../../Footer';
 
 
 const AuthenticationLayout = () => {
     return (
         <div>
             <Header></Header>
-            <div className='flex border justify-center items-start  w-4xl mx-auto mt-15'>
-                <div className='h-full'>
+            <div className='flex justify-center my-10'>
+              
                     <Outlet></Outlet>
-                </div>
-                <div>
-                    <img className='w-auto h-auto' src={auth} alt="" />
-                </div>
+               
+                
             </div>
+            {/* flex border justify-center items-start  w-4xl mx-auto mt-15 */}
+            <Footer></Footer>
         </div>
     );
 };

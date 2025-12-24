@@ -25,6 +25,7 @@ const Dashboard = () => {
                 {/* Page content here */}
                 <Outlet></Outlet>
             </div>
+            
 
             <div className="drawer-side is-drawer-close:overflow-visible">
                 <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>

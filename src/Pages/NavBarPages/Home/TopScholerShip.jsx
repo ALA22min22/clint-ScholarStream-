@@ -2,12 +2,13 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Link } from 'react-router';
+import Loading from '../../../component/Loading';
 
 const TopScholerShip = () => {
     const publicAxios = axios.create({
-        baseURL: "  http://localhost:5000"
+        baseURL: "http://localhost:50000"
     });
-    const { data: topSchol = [] } = useQuery({
+    const { data: topSchol = [], isLoading } = useQuery({
         queryKey: ["scholership-home"],
         queryFn: async () => {
             const res = await publicAxios.get("/scholership-home");
@@ -16,6 +17,9 @@ const TopScholerShip = () => {
     })
 
 
+    if(isLoading){
+        return <Loading></Loading>
+    }
    
 
     // console.log(topSchol)
