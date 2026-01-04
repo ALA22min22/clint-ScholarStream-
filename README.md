@@ -49,6 +49,23 @@ This project relies on the following major libraries:
 Follow these steps to set up the project on your local machine:
 
 **1. Clone the repository:**
-```bash
-git clone https://github.com/ALA22min22/clint-ScholarStream-.git
-```
+> git clone [https://github.com/ALA22min22/clint-ScholarStream-.git](https://github.com/ALA22min22/clint-ScholarStream-.git)
+
+**2. Navigate to the project directory:**
+> cd clint-ScholarStream-
+
+**3. Install dependencies:**
+> npm install
+
+**4. Set up Environment Variables:**
+Create a `.env.local` file in the root folder and add your Firebase and Stripe keys:
+> VITE_apiKey=your_firebase_api_key
+> VITE_authDomain=your_firebase_auth_domain
+> VITE_projectId=your_firebase_project_id
+> VITE_STRIPE_PUBLIC_KEY=your_stripe_key
+
+**5. Run the development server:**
+> npm run dev
+
+**6. Open in Browser:**
+The app should now be running at http://localhost:5173
