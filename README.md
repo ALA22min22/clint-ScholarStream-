@@ -1,126 +1,80 @@
-# 🎓 ScholarStream - Scholarship Management System
+# 🎓 ScholarStream - Scholarship Management Platform
 
-![ScholarStream Banner](https://i.ibb.co.com/c7cB4RX/Screenshot-2026-01-05-042513.png)
+## 📖 Project Overview
+**ScholarStream** is a robust MERN (MongoDB, Express.js, React, Node.js) application designed to centralize and simplify the educational financial aid process. It serves as a bridge between students seeking scholarships and universities offering them. The platform ensures a secure environment for managing applications, payments, and reviews through distinct role-based permissions for Students, Moderators, and Admins.
 
-**ScholarStream** is a comprehensive full-stack web platform designed to bridge the gap between students seeking financial aid and scholarship providers. It simplifies the process of finding, applying for, and managing scholarships through a user-friendly interface and robust role-based dashboards for Students, Moderators, and Admins.
-
-### 🔗 Live Links
-<a href="https://scholarstream-2217c.web.app/home" target="_blank"><img src="https://img.shields.io/badge/Live_Site-Visit_Now-FF5722?style=for-the-badge&logo=vercel&logoColor=white" /></a>
-<a href="https://github.com/ALA22min22/clint-ScholarStream-.git" target="_blank"><img src="https://img.shields.io/badge/Client_Repo-GitHub-black?style=for-the-badge&logo=github&logoColor=white" /></a>
+## 🖼 Screenshot
+![ScholarStream Homepage](https://i.ibb.co.com/c7cB4RX/Screenshot-2026-01-05-042513.png)
 
 ---
 
-## ✨ Core Features
-
-* **🔐 User Authentication:** Secure login/registration and Social Login (Google) via **Firebase**.
-* **👥 Role-Based Access Control (RBAC):** Distinct dashboards and permissions for **Students**, **Moderators**, and **Admins**.
-* **🔎 Smart Search & Filter:** Students can search scholarships by university name, degree category, or location.
-* **💳 Secure Payment Integration:** Hassle-free application fee processing using **Stripe**.
-* **🆔 Unique Application Tracking:** Every application generates a **Random Tracking ID** for secure and easy reference.
-* **📝 Dynamic Management:** Students can update applications; Moderators can approve/reject; Admins oversee the entire system.
-* **📊 Analytics & Insights:** Admins can view fund statistics and application trends using interactive charts.
-* **📱 Responsive Design:** Fully optimized for all devices using Tailwind CSS and DaisyUI.
+## ⚙️ Main Technologies
+* **Frontend:** React (Vite), Tailwind CSS, DaisyUI.
+* **Backend:** Node.js, Express.js.
+* **Database:** MongoDB.
+* **Authentication:** Firebase Auth & JSON Web Token (JWT).
+* **Payment Gateway:** Stripe.
+* **Animations:** Framer Motion.
 
 ---
 
-## 🛠️ Technologies Used
-
-<div align="center">
-<table border="1" cellspacing="0" cellpadding="10">
-  <thead>
-    <tr align="center">
-      <th>Category</th>
-      <th colspan="4">Technologies / Tools</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr align="center">
-      <td><b>Frontend</b></td>
-      <td><img src="https://skillicons.dev/icons?i=react" width="40"><br>React.js</td>
-      <td><img src="https://skillicons.dev/icons?i=vite" width="40"><br>Vite</td>
-      <td><img src="https://skillicons.dev/icons?i=tailwind" width="40"><br>Tailwind</td>
-      <td><img src="https://skillicons.dev/icons?i=js" width="40"><br>JavaScript</td>
-    </tr>
-    <tr align="center">
-      <td><b>Backend</b></td>
-      <td><img src="https://skillicons.dev/icons?i=nodejs" width="40"><br>Node.js</td>
-      <td><img src="https://skillicons.dev/icons?i=express" width="40"><br>Express.js</td>
-      <td><img src="https://skillicons.dev/icons?i=firebase" width="40"><br>Firebase</td>
-      <td>-</td>
-    </tr>
-    <tr align="center">
-      <td><b>Database</b></td>
-      <td><img src="https://skillicons.dev/icons?i=mongodb" width="40"><br>MongoDB</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr align="center">
-      <td><b>Payment & ID</b></td>
-      <td><b>Stripe API</b><br>Payment Gateway</td>
-      <td><b>Random ID</b><br>Tracking System</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr align="center">
-      <td><b>Tools</b></td>
-      <td><img src="https://skillicons.dev/icons?i=github" width="40"><br>GitHub</td>
-      <td><img src="https://skillicons.dev/icons?i=vscode" width="40"><br>VS Code</td>
-      <td><img src="https://skillicons.dev/icons?i=figma" width="40"><br>Figma</td>
-      <td><img src="https://skillicons.dev/icons?i=npm" width="40"><br>NPM</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+## 🌟 Core Features
+* **🔐 Secure Multi-Role System:** Role-based access control (RBAC) with dedicated dashboards for Admin (User/Scholarship management), Moderator (Application review), and Student (Applying/Tracking).
+* **💳 Integrated Payment System:** Secure application fee processing via Stripe, with logic to handle payment success and failure scenarios.
+* **🔎 Advanced Search & Filtering:** Server-side implementation for searching by scholarship name, university, or degree, and filtering by category or country.
+* **📊 Admin Analytics:** Interactive data visualization using charts to track total users, fees collected, and scholarship distribution.
+* **📝 Comprehensive Application Tracking:** Students can track their application status (Pending -> Processing -> Completed) and receive feedback from moderators.
+* **⭐ Interactive Review System:** Students can rate and review scholarships, which are then displayed on the details page for others to see.
 
 ---
 
 ## 📦 Key Dependencies
+### Frontend:
+* `react-router-dom`: For client-side routing and private routes.
+* `@tanstack/react-query`: For efficient data fetching and caching.
+* `framer-motion`: For modern UI animations.
+* `stripe/react-stripe-js`: For payment integration.
+* `recharts`: For generating analytics charts.
+* `axios`: For API communication.
 
-This project relies on the following major libraries:
-
-* **@tanstack/react-query**: For high-performance data fetching and synchronization.
-* **axios**: For making secure API requests to the Node/Express backend.
-* **stripe/react-stripe-js**: For handling secure credit card payments.
-* **recharts**: For visualizing application and scholarship data charts.
-* **react-hook-form**: For managing complex scholarship application forms.
-* **react-router-dom**: For handling multi-role dashboard navigation.
-* **sweetalert2 / react-toastify**: For real-time user feedback and alerts.
+### Backend:
+* `jsonwebtoken`: For secure token-based authentication (JWT).
+* `dotenv`: For managing environment variables (Firebase/MongoDB keys).
+* `cors`: To handle cross-origin requests.
+* `stripe`: For server-side payment verification.
 
 ---
 
 ## 💻 How to Run Locally
 
-Follow these steps to set up the project on your local machine:
+Follow these steps to set up the project locally:
 
 **1. Clone the repository:**
-> git clone https://github.com/ALA22min22/clint-ScholarStream-.git
+> git clone (https://github.com/ALA22min22/clint-ScholarStream-.git)
 
 **2. Navigate to the project directory:**
-> cd clint-ScholarStream-
+> cd ScholarStream
 
-**3. Install dependencies:**
-> npm install
+**3. Install dependencies (Both Client & Server):**
+> cd client && npm install
+> cd ../server && npm install
 
 **4. Set up Environment Variables:**
-Create a `.env.local` file in the root folder and add your credentials:
-> VITE_apiKey=your_firebase_api_key <br>
-> VITE_authDomain=your_firebase_auth_domain <br>
-> VITE_projectId=your_firebase_project_id <br>
-> VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key <br>
+Create a `.env` file in the **server** folder and a `.env.local` in the **client** folder.
+* **Server:** `MONGODB_URI`, `JWT_SECRET`, `STRIPE_SECRET_KEY`.
+* **Client:** Firebase Config Keys, Stripe Public Key.
 
-**5. Run the development server:**
-> npm run dev
+**5. Run the Application:**
+* Start Server: `npm start` (in server folder).
+* Start Client: `npm run dev` (in client folder).
 
 ---
 
-<h3 align="center">📫 Connect with Me</h3>
-<div align="center">
-  <a href="https://www.linkedin.com/in/md-alamin-dev" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
-  &nbsp;
-  <a href="https://github.com/ALA22min22" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-</div>
+## 🔗 Resources & Links
+* **Live Site:** [jocular-hummingbird-726c25.netlify.app](scholarstream-2217c.web.app/home)
+* **UI Inspiration:** UIverse, DaisyUI Docs.
+* **Documentation:** [React Docs](https://react.dev), [Stripe Docs](https://stripe.com/docs).
+
+---
+
+<h3 align="center">📫 Developed by (MD. Alamin)</h3>
