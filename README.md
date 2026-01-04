@@ -71,7 +71,7 @@ Create a `.env` file in the **server** folder and a `.env.local` in the **client
 ---
 
 ## 🔗 Resources & Links
-* **Live Site:** (scholarstream-2217c.web.app/home)
+* **Live Site:** [scholarstream-2217c.web.app/home](https://scholarstream-2217c.web.app/home)
 * **UI Inspiration:** UIverse, DaisyUI Docs.
 * **Documentation:** [React Docs](https://react.dev), [Stripe Docs](https://stripe.com/docs).
 
