@@ -59,10 +59,10 @@ Follow these steps to set up the project on your local machine:
 
 **4. Set up Environment Variables:**
 Create a `.env.local` file in the root folder and add your Firebase and Stripe keys:
-> VITE_apiKey=your_firebase_api_key
-> VITE_authDomain=your_firebase_auth_domain
-> VITE_projectId=your_firebase_project_id
-> VITE_STRIPE_PUBLIC_KEY=your_stripe_key
+> VITE_apiKey=your_firebase_api_key <br>
+> VITE_authDomain=your_firebase_auth_domain <br>
+> VITE_projectId=your_firebase_project_id <br>
+> VITE_STRIPE_PUBLIC_KEY=your_stripe_key <br>
 
 **5. Run the development server:**
 > npm run dev
