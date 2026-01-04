@@ -76,5 +76,17 @@ Create a `.env` file in the **server** folder and a `.env.local` in the **client
 * **Documentation:** [React Docs](https://react.dev), [Stripe Docs](https://stripe.com/docs).
 
 ---
+<h3 align="center">📫 Connect with Me</h3>
+<div align="center">
+  <a href="https://www.linkedin.com/in/md-alamin-dev" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/ALA22min22" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+</div>
+
+---
 
 <h3 align="center">📫 Developed by (MD. Alamin)</h3>
