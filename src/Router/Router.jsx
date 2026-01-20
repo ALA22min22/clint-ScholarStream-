@@ -24,6 +24,9 @@ import AdminPrivateRoute from "../Provider/AdminPrivateRoute";
 import ModaretorPrivateRoute from "../Provider/ModaretorPrivateRoute";
 import Successer from "../Pages/NavBarPages/Home/Successer";
 import ContactWithFAQ from "../Pages/NavBarPages/Home/ContactWithFAQ";
+import AboutUs from "../Pages/NavBarPages/Home/About/AboutUs";
+import HelpSupport from "../Pages/NavBarPages/Help/HelpSupport";
+import PrivacyTerms from "../Pages/NavBarPages/Privacy/PrivacyTerms";
 
 export const router = createBrowserRouter([
     {
@@ -42,7 +45,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "scholarships/:id",
-                element: <PrivateRoute> <ScholershipDetails></ScholershipDetails> </PrivateRoute>
+                element:  <ScholershipDetails></ScholershipDetails>
             },
             {
                 path: "successer",
@@ -51,8 +54,23 @@ export const router = createBrowserRouter([
             {
                 path: "faq",
                 Component: ContactWithFAQ
+            },
+
+            // ----------------
+
+            {
+                path: "about-us",
+                Component: AboutUs
+            },
+            {
+                path: "help",
+                Component: HelpSupport
+            },
+            {
+                path: "PrivacyTerms",
+                Component: PrivacyTerms
             }
-            
+
            
         ]
     },

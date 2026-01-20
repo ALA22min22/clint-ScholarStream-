@@ -26,14 +26,14 @@ const TopScholerShip = () => {
 
     return (
         <div>
-            <h3 className='text-5xl font-bold text-primary text-center my-10'>Top Scholarships</h3>
+            <h3 id='top-scho' className='text-5xl font-bold text-primary text-center my-10 uppercase'>Top Scholarships</h3>
             <div 
-            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-5 max-w-6xl mx-auto'
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-5  mx-auto '
             >
                 {
                     topSchol.map(top => <div 
                     key={top._id} 
-                    className="group before:hover:scale-95 before:hover:h-72 before:hover:w-80 before:hover:h-44 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-sky-200 via-orange-200 to-orange-700 before:absolute before:top-0  min-h-72 relative  flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden hero  bg-gradient-to-r from-blue-50 to-white relative overflow-hidden"
+                    className="group before:hover:scale-95 before:hover:h-72 before:hover:w-80 before:hover:h-44 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-sky-200 via-orange-200 to-orange-700 before:absolute before:top-0  min-h-72 relative  flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden hero  bg-gradient-to-r from-blue-50 to-white relative overflow-hidden p-2"
                     >
 
                         <div className='my-1'>
@@ -62,7 +62,7 @@ const TopScholerShip = () => {
                             </div>
 
                         </div>
-                        <div class="card-actions justify-end my-2">
+                        <div class="card-actions justify-end my-2 w-full">
                             <Link to={`/scholarships/${top._id}`} class="btn btn-primary w-full group">
                                 View Details
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition-transform group-hover:translate-x-1">
@@ -79,3 +79,4 @@ const TopScholerShip = () => {
 };
 
 export default TopScholerShip;
+

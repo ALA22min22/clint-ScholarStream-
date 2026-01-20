@@ -24,7 +24,7 @@ const MyProfile = () => {
 
     return (
         <div>
-            <h3 className='text-5xl font-bold text-primary text-center mt-10 '>My Profile</h3>
+            <h3 className='text-5xl font-bold text-primary text-center mt-10 uppercase'>My Profile</h3>
             <div className='border-b border-gray-300 mt-10'></div>
             {
                 myData.map(user => <div className="flex justify-center items-center min-h-screen bg-base-200 py-10">
@@ -35,7 +35,7 @@ const MyProfile = () => {
                             <div >
                                 <div className="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                     <img
-                                        className='rounded-full'
+                                        className='rounded-full w-full h-full'
                                         src={user.photoURL}
                                         alt="Profile"
                                     />

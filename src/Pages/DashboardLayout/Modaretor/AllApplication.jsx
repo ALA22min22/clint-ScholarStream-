@@ -69,7 +69,7 @@ const AllApplication = () => {
 
     return (
         <div>
-            <h3 className="text-5xl font-bold text-primary text-center my-10">All Applications</h3>
+            <h3 className="text-5xl font-bold text-primary text-center uppercase my-10 ">All Applications</h3>
             <div className="border-b text-gray-300 mb-10"></div>
 
             <div className="overflow-x-auto">

@@ -16,3 +16,47 @@ a.active {
   border: 1px solid black;
   padding: 1px;
 }
+
+
+
+/* ---- Dark Mode Logic Fix ---- */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+[data-theme='dark'] body {
+    color: #ffffff; /* under body default text white  */
+}
+
+/* convert text-black color to light into the dark mood. 
+*/
+[data-theme='dark'] .text-black {
+    color: #e2e8f0 !important; 
+}
+
+/* convert text-color to light into the dark mood. 
+*/
+[data-theme='dark'] .text-gray-600,
+[data-theme='dark'] .text-gray-700,
+[data-theme='dark'] .text-gray-800,
+[data-theme='dark'] .text-gray-900 {
+    color: #cbd5e1 !important; /* লাইট গ্রে */
+}
+
+/* convert bg-color to light into the dark mood. 
+*/
+[data-theme='dark'] .bg-white {
+    background-color: #1d232a !important;
+    border-color: #374151 !important; 
+}
+
+/*  convert input-field color to light into the dark mood. */
+[data-theme='dark'] input, 
+[data-theme='dark'] textarea, 
+[data-theme='dark'] select {
+    background-color: #1d232a !important;
+    color: #ffffff !important;
+    border-color: #4b5563 !important;
+}

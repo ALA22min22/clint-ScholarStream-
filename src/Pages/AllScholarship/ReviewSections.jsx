@@ -1,14 +1,18 @@
 import React from 'react';
-import UseAxiosSequre from '../Hooks/UseAxiosSequre';
+// import UseAxiosSequre from '../Hooks/UseAxiosSequre';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../component/Loading';
+import axios from 'axios';
 
 const ReviewSections = ({ scholarship }) => {
-    const axiosSecure = UseAxiosSequre();
+    // const axiosSecure = UseAxiosSequre();
+     const axiooPublic = axios.create({
+        baseURL: 'https://scolership-server.vercel.app',
+    });
     const { data: review = [], isLoading, refetch, isError } = useQuery({
         queryKey: ["review", scholarship._id],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/review/${scholarship._id}`);
+            const res = await axiooPublic.get(`/review/${scholarship._id}`);
             return res.data;
         }
     })
@@ -24,7 +28,7 @@ const ReviewSections = ({ scholarship }) => {
 
     return (
         <div >
-            <h3 className="text-5xl text-black font-bold text-center my-10">All Reviews</h3>
+            <h3 className="text-5xl text-black font-bold text-center my-10 uppercase">All Reviews</h3>
 
             <div className='max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {

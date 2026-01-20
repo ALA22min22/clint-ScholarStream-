@@ -14,8 +14,8 @@ const ReviewForm = ({ scholarship }) => {
 
         const inserData = {
             scholarshipId: scholarship._id,
-            scholarshipName : scholarship.scholarshipName,
-            universityName : scholarship.universityName,
+            scholarshipName: scholarship.scholarshipName,
+            universityName: scholarship.universityName,
             ...data,
         }
         axiosSecure.post("/review", inserData)
@@ -30,7 +30,7 @@ const ReviewForm = ({ scholarship }) => {
 
     return (
         <div>
-            <h2 className="text-5xl text-black font-bold text-center my-10">Write a Review</h2>
+            <h2 className="text-5xl text-black font-bold text-center my-10 uppercase">Write a Review</h2>
             <form
                 onSubmit={handleSubmit(submitReview)}
                 className="card bg-base-200 lg:w-xl mx-auto shadow-xl p-4 space-y-4"
@@ -91,9 +91,12 @@ const ReviewForm = ({ scholarship }) => {
                 </div>
 
                 {/* Submit Button */}
-                <button type="submit" className="btn btn-primary w-full text-white">
-                    Submit Review
-                </button>
+                {
+                    user &&
+                    <button type="submit" className="btn btn-primary w-full text-white">
+                        Submit Review
+                    </button>
+                }
             </form>
             <ToastContainer />
         </div>

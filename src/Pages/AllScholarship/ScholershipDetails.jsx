@@ -1,10 +1,11 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import UseAxiosSequre from '../Hooks/UseAxiosSequre';
 import { useQuery } from '@tanstack/react-query';
 import ReviewForm from './ReviewForm';
 import ReviewSections from './ReviewSections';
 import UseAuth from '../Hooks/UseAuth';
+import axios from 'axios';
 
 const ScholershipDetails = () => {
     const { user } = UseAuth();
@@ -12,10 +13,14 @@ const ScholershipDetails = () => {
     const { id } = useParams();
     const axiooSecure = UseAxiosSequre();
 
+    const axiooPublic = axios.create({
+        baseURL: 'https://scolership-server.vercel.app',
+    });
+
     const { data: scholarship = [] } = useQuery({
         queryKey: ["scholarships", id],
         queryFn: async () => {
-            const res = await axiooSecure.get(`/selected-scholarships/${id}`);
+            const res = await axiooPublic.get(`/selected-scholarships/${id}`);
             return res.data
         }
     })
@@ -57,10 +62,10 @@ const ScholershipDetails = () => {
 
     // console.log("after details", details)
     return (
-        <div className='bg-base-200'>
-            <div className="min-h-screen bg-base-200 pt-10 px-4">
+        <div className='bg-base-200 px-2'>
+            <div className="min-h-screen bg-base-200 pt-10 ">
 
-                <div className="max-w-6xl mx-auto">
+                <div className="">
 
                     {/* --- Hero Section --- */}
                     <div className="relative h-64 md:h-96 w-full overflow-hidden rounded-2xl shadow-xl mb-8 group">
@@ -179,12 +184,20 @@ const ScholershipDetails = () => {
                                     </div>
 
                                     {/* Apply Button */}
-                                    <div onClick={() => handleApply(scholarship)} className="card-actions mt-6">
-                                        <button className="btn btn-primary w-full text-lg font-bold text-white transition-all hover:scale-105">
-                                            Apply Now
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                                        </button>
-                                    </div>
+                                    {
+                                        user
+                                            ? <div onClick={() => handleApply(scholarship)} className="card-actions mt-6">
+                                                <button className="btn btn-primary w-full text-lg font-bold text-white transition-all hover:scale-105">
+                                                    Apply Now
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                                                </button>
+                                            </div>
+                                            : <div className="card-actions mt-6">
+                                                <Link to={"/login"} className="btn bg-red-500 w-full text-lg font-bold text-white transition-all hover:scale-105">
+                                                    Pleace Login to Apply!!
+                                                </Link>
+                                            </div>
+                                    }
 
                                 </div>
                             </div>

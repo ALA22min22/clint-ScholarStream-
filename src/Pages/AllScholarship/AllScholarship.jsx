@@ -6,7 +6,6 @@ import Loading from '../../component/Loading';
 import { motion } from "framer-motion";
 
 
-
 const AllScholarship = () => {
     const publicAxios = axios.create({
         baseURL: "https://scolership-server.vercel.app"
@@ -45,8 +44,8 @@ const AllScholarship = () => {
     }
 
     return (
-        <div className='max-w-6xl mx-auto'>
-            <section className='flex flex-col md:flex-row lg:flex-row justify-between items-center mt-10 '>
+        <div id='all-scho' className=' p-2'>
+            {/* <section className='flex flex-col md:flex-row lg:flex-row justify-between items-center mt-10 '>
 
                 <form onSubmit={handleSearch}
                     class="relative w-55 bg-gray-100 rounded-2xl shadow-md p-1.5 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg"
@@ -114,7 +113,77 @@ const AllScholarship = () => {
 
             </section>
 
-            <div className='border-b border-gray-500 my-10 '></div>
+            <div className='border-b border-gray-500 my-10 '></div> */}
+
+            <section className='container mx-auto px-4 mt-10'>
+   
+    <div className='grid grid-cols-1 md:grid-cols-3 gap-6 items-center'>
+
+        {/* 1. Search Bar (Left Aligned on Desktop) */}
+        <div className='order-2 md:order-1 flex justify-center md:justify-start'>
+            <form onSubmit={handleSearch}
+                className="relative w-full max-w-xs bg-white border border-gray-200 rounded-full shadow-sm transition-all duration-300 hover:shadow-md focus-within:ring-2 focus-within:ring-primary/50"
+            >
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
+                    </svg>
+                </div>
+                <input
+                    type="text"
+                    name='search'
+                    className="w-full pl-10 pr-24 py-3 text-sm text-gray-700 bg-transparent rounded-full focus:outline-none"
+                    placeholder="Search scholarships..."
+                />
+                <button
+                    className="absolute right-1 top-1 bottom-1 px-4 bg-primary hover:bg-primary-focus text-white text-sm font-medium rounded-full transition-colors duration-200"
+                >
+                    Search
+                </button>
+            </form>
+        </div>
+
+        {/* 2. Title (Center Aligned) */}
+        <div className='order-1 md:order-2 text-center'>
+            <motion.h3 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                whileHover={{ scale: 1.02 }}
+                className='text-3xl md:text-4xl lg:text-5xl font-bold text-primary tracking-tight'
+            >
+                All Scholarships
+            </motion.h3>
+            <p className="text-gray-500 text-sm mt-1">Find your dream opportunity</p>
+        </div>
+
+        {/* 3. Sort Dropdown (Right Aligned on Desktop) */}
+        <div className='order-3 flex justify-center md:justify-end'>
+            <div className="dropdown dropdown-end dropdown-hover">
+                <div tabIndex={0} role="button" className="btn btn-outline btn-primary rounded-full px-6 m-1 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-filter" viewBox="0 0 16 16">
+                        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    Sort By
+                </div>
+                <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box z-[10] w-56 p-2 shadow-xl border border-gray-100">
+                    <li className="menu-title text-xs uppercase text-gray-400 font-semibold ml-2">Date</li>
+                    <li><button onClick={() => { setSortField("postDate"); setSortOrder("desc"); }}>Newest First</button></li>
+                    <li><button onClick={() => { setSortField("postDate"); setSortOrder("asc"); }}>Oldest First</button></li>
+                    
+                    <div className="divider my-0"></div>
+
+                    <li className="menu-title text-xs uppercase text-gray-400 font-semibold ml-2">Fees</li>
+                    <li><button onClick={() => { setSortField("applicationFees"); setSortOrder("asc"); }}>Fees (Low to High)</button></li>
+                    <li><button onClick={() => { setSortField("applicationFees"); setSortOrder("desc"); }}>Fees (High to Low)</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    {/* Divider with subtle gradient */}
+    <div className='h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-10'></div>
+</section>
 
 
 
@@ -125,7 +194,7 @@ const AllScholarship = () => {
                     {
                         allScho.map(top => <div
                             key={top._id}
-                            className="group before:hover:scale-95 before:hover:h-72 before:hover:w-80 before:hover:h-44 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-sky-200 via-orange-200 to-orange-700 before:absolute before:top-0  min-h-72 relative  flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden hero  bg-gradient-to-r from-blue-50 to-white relative overflow-hidden"
+                            className="group before:hover:scale-95 before:hover:h-72 before:hover:w-80 before:hover:h-44 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-sky-200 via-orange-200 to-orange-700 before:absolute before:top-0  min-h-72 relative  flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden hero  bg-gradient-to-r from-blue-50 to-white relative overflow-hidden p-2"
                         >
 
                             <div className='my-1'>
@@ -154,7 +223,7 @@ const AllScholarship = () => {
                                 </div>
 
                             </div>
-                            <div class="card-actions justify-end my-2">
+                            <div class="card-actions justify-end my-2 w-full">
                                 <Link to={`/scholarships/${top._id}`} class="btn btn-primary w-full group">
                                     View Details
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition-transform group-hover:translate-x-1">
