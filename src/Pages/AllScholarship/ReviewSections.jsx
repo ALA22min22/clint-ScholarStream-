@@ -5,7 +5,7 @@ import Loading from '../../component/Loading';
 import axios from 'axios';
 
 const ReviewSections = ({ scholarship }) => {
-    // const axiosSecure = UseAxiosSequre();
+    // const axiosSecure = UseAxiosSequre();    // this is part use for old design.
      const axiooPublic = axios.create({
         baseURL: 'https://scolership-server.vercel.app',
     });
